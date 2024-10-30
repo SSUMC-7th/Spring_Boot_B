@@ -1,9 +1,6 @@
 package umc.spring.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 import umc.spring.domain.common.BaseEntity;
 
@@ -19,4 +16,8 @@ public class Region extends BaseEntity {
     private Long id;
 
     private String name;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "store_id")
+    private Store store;
 }

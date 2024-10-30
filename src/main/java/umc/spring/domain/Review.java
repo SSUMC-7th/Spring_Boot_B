@@ -4,6 +4,9 @@ import jakarta.persistence.*;
 import lombok.*;
 import umc.spring.domain.common.BaseEntity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Getter
 @Builder
@@ -22,4 +25,10 @@ public class Review extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
+
+    @OneToMany(mappedBy = "review", cascade = CascadeType.ALL)
+    private List<Comment> commentList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "review", cascade = CascadeType.ALL)
+    private List<ReviewImage> reviewImageList = new ArrayList<>();
 }
