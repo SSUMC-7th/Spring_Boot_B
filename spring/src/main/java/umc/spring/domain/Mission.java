@@ -21,5 +21,10 @@ public class Mission extends BaseEntity {
 
     private LocalDate dueDate;
 
+    @Column(nullable = false, length = 100)
     private String missionSpec;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "store_id")
+    private Store store;
 }

@@ -16,12 +16,18 @@ public class Store extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false, length = 30)
     private String name;
 
     private Float score;
 
+    @Column(nullable = false, length = 40)
     private String address;
 
     @Enumerated(EnumType.STRING)
     private FoodCategory foodCategory;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "region_id")
+    private Region region;
 }
