@@ -17,6 +17,7 @@ public class FavoriteFood extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Enumerated(EnumType.STRING)
     private Food food;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
