@@ -27,26 +27,31 @@ public class Member extends BaseEntity {
     @Column(nullable = false, length = 255)
     private String password;
 
+    @Column(nullable = false, length = 20)
     private String name;
 
+    @Column(nullable = false, length = 40)
     private String address;
 
     private String birth;
 
+    @Column(columnDefinition = "VARCHAR(10)")
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
     @Enumerated(EnumType.STRING)
     private SocialType socialType;
 
+    @Column(columnDefinition = "VARCHAR(15) DEFAULT 'ACTIVE'")
     @Enumerated(EnumType.STRING)
     private MemberStatus status;
 
     private LocalDate inactiveDate;
 
+    @Column(nullable = false, length = 50)
     private String email;
 
-    private Integer point;
+    private Long point;
 
     private String tel;
 

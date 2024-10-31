@@ -23,4 +23,8 @@ public class Mission extends BaseEntity{
     private LocalDate deadline;
 
     private String content;
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "restaurant_id")
+    private Restaurant restaurant;
 }

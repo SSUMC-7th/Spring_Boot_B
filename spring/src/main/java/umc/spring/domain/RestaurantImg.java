@@ -17,4 +17,8 @@ public class RestaurantImg extends BaseEntity{
     private Long id;
 
     private String imgKey;
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "restaurant_id")
+    private Restaurant restaurant;
 }
