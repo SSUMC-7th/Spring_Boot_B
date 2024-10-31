@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 import umc.spring.domain.common.BaseEntity;
 
+import java.util.*;
+
 @Entity
 @Getter
 @Builder
@@ -16,4 +18,7 @@ public class Region extends BaseEntity {
 
     @Column(nullable = false, length = 30)
     private String name;
+
+    @OneToMany(mappedBy = "region", cascade = CascadeType.ALL)
+    private List<Store> StoreList = new ArrayList<>();
 }

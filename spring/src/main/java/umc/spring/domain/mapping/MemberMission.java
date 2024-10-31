@@ -17,6 +17,7 @@ public class MemberMission {
     private Long id;
 
     @Enumerated(EnumType.STRING)
+    @Column(columnDefinition = "VARCHAR(15) DEFAULT 'NOT_STARTED'")
     private MissionStatus status;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -24,6 +25,6 @@ public class MemberMission {
     private Member member;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "food_id")
-    private Food food;
+    @JoinColumn(name = "mission_id")
+    private Mission mission;
 }
