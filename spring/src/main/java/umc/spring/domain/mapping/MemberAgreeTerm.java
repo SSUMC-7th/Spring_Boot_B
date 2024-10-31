@@ -1,23 +1,18 @@
-package umc.spring.domain;
+package umc.spring.domain.mapping;
 
 import jakarta.persistence.*;
 import lombok.*;
-import umc.spring.domain.common.BaseEntity;
 
 @Entity
 @Getter
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class Term extends BaseEntity {
+public class MemberAgreeTerm {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
 
-    private String content;
-
-    private Boolean agreeOptional;
 }

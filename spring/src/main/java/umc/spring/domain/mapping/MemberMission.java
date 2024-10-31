@@ -1,23 +1,20 @@
-package umc.spring.domain;
+package umc.spring.domain.mapping;
 
 import jakarta.persistence.*;
 import lombok.*;
-import umc.spring.domain.common.BaseEntity;
+import umc.spring.domain.enums.MissionStatus;
 
 @Entity
 @Getter
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class Term extends BaseEntity {
+public class MemberMission {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
-
-    private String content;
-
-    private Boolean agreeOptional;
+    @Enumerated(EnumType.STRING)
+    private MissionStatus status;
 }

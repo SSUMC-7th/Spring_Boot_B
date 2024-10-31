@@ -10,11 +10,14 @@ import umc.spring.domain.enums.*;
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class LikeFood extends BaseEntity {
+public class Food extends BaseEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Enumerated(EnumType.STRING)
     private FoodCategory foodCategory;
+
+    private Boolean preferOptional;
 }

@@ -9,15 +9,10 @@ import umc.spring.domain.common.BaseEntity;
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class Term extends BaseEntity {
-
+public class Region extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
-
-    private String content;
-
-    private Boolean agreeOptional;
 }
