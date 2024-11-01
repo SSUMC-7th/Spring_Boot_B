@@ -3,6 +3,7 @@ package umc.spring.domain;
 import jakarta.persistence.*;
 import lombok.*;
 import umc.spring.domain.common.BaseEntity;
+import umc.spring.domain.enums.FoodCategory;
 import umc.spring.domain.mapping.MemberMission;
 import umc.spring.domain.mapping.MemberPreferFood;
 
@@ -22,7 +23,7 @@ public class Food extends BaseEntity {
 
     @Enumerated(EnumType.STRING)
     @Column(columnDefinition = "VARCHAR(20)")
-    private umc.spring.domain.enums.FoodCategory foodCategory;
+    private FoodCategory foodCategory;
 
     @Column(nullable = false)
     private Boolean preferOptional;
