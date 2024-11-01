@@ -22,8 +22,6 @@ public class Restaurant extends BaseEntity{
     @Column(nullable = false, length = 100)
     private String category;
 
-    private String address;
-
     private Float score;
 
     @Column(length = 100)

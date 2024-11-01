@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.*;
 import umc.spring.domain.Member;
 import umc.spring.domain.Mission;
-import umc.spring.domain.Restaurant;
 import umc.spring.domain.common.BaseEntity;
 import umc.spring.domain.enums.MissionStatus;
 

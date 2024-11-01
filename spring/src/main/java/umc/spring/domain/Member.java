@@ -21,12 +21,6 @@ public class Member extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = true, length = 30)
-    private String userID;
-
-    @Column(nullable = false, length = 255)
-    private String password;
-
     @Column(nullable = false, length = 20)
     private String name;
 
@@ -55,9 +49,4 @@ public class Member extends BaseEntity {
 
     private String tel;
 
-    /*
-    public void passwordEncode(PasswordEncoder passwordEncoder) {
-        this.password = passwordEncoder.encode(this.password);
-    }
-     */
 }
