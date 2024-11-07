@@ -35,6 +35,8 @@ public class QMission extends EntityPathBase<Mission> {
 
     public final StringPath missionSpec = createString("missionSpec");
 
+    public final EnumPath<umc.spring.domain.enums.MissionStatus> missionStatus = createEnum("missionStatus", umc.spring.domain.enums.MissionStatus.class);
+
     public final NumberPath<Integer> reward = createNumber("reward", Integer.class);
 
     public final QStore store;
