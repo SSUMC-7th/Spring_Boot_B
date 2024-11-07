@@ -1,12 +1,7 @@
 package umc.spring.service.ReviewService;
 
-import umc.spring.domain.Store;
-
-import java.util.List;
-import java.util.Optional;
+import umc.spring.domain.Review;
 
 public interface ReviewQueryService {
-
-    Optional<Store> findStore(Long id);
-    List<Store> findStoresByNameAndScore(String name, Float score);
+    Review saveReview(Long memberId, Long storeId, String content, float rating);
 }

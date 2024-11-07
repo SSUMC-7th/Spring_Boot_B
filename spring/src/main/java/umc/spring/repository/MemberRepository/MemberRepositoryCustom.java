@@ -1,8 +1,9 @@
 package umc.spring.repository.MemberRepository;
 
+import com.querydsl.core.types.dsl.BooleanExpression;
 import umc.spring.domain.Member;
-import java.util.List;
+import java.util.Optional;
 
 public interface MemberRepositoryCustom {
-    List<Member> dynamicQueryWithBooleanBuilder(String name, Float score);
+    Optional<Member> findMemberById(Long memberId);
 }

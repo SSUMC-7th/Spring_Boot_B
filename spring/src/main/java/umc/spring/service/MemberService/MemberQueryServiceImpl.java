@@ -1,32 +1,24 @@
 package umc.spring.service.MemberService;
 
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import umc.spring.domain.Store;
-import umc.spring.repository.StoreRepository.StoreRepository;
+import umc.spring.domain.Member;
+import umc.spring.repository.MemberRepository.MemberRepository;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
-@RequiredArgsConstructor
-@Transactional(readOnly = true)
+@Transactional
 public class MemberQueryServiceImpl implements MemberQueryService {
 
-    private final StoreRepository storeRepository;
+    private final MemberRepository memberRepository;
 
-    @Override
-    public Optional<Store> findStore(Long id) {
-        return storeRepository.findById(id);
+    public MemberQueryServiceImpl(MemberRepository memberRepository) {
+        this.memberRepository = memberRepository;
     }
 
     @Override
-    public List<Store> findStoresByNameAndScore(String name, Float score) {
-        List<Store> filteredStores = storeRepository.dynamicQueryWithBooleanBuilder(name, score);
-
-        filteredStores.forEach(store -> System.out.println("Store: " + store));
-
-        return filteredStores;
+    public Optional<Member> getMemberById(Long memberId) {
+        return memberRepository.findMemberById(memberId);
     }
 }

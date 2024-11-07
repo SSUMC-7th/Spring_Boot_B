@@ -2,25 +2,37 @@ package umc.spring.repository.MemberRepository;
 
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import umc.spring.domain.QMember;
 import umc.spring.domain.Member;
 
-import java.util.List;
+import java.util.Optional;
+
+import static umc.spring.domain.QMember.member;
 
 @Repository
-@RequiredArgsConstructor
 public class MemberRepositoryImpl implements MemberRepositoryCustom {
-    private final JPAQueryFactory jpaQueryFactory;
-    private final QMember member=QMember.member;
 
-    public List<Member> dynamicQueryWithBooleanBuilder(String name, Float score) {
-        BooleanBuilder predicate = new BooleanBuilder();
+    private final JPAQueryFactory queryFactory;
 
-        return jpaQueryFactory
-                .selectFrom(member)
-                .where(predicate)
-                .fetch();
+    @Autowired
+    public MemberRepositoryImpl(JPAQueryFactory queryFactory) {
+        this.queryFactory = queryFactory;
+    }
+
+    @Override
+    public Optional<Member> findMemberById(Long memberId) {
+        BooleanBuilder builder = new BooleanBuilder();
+
+        if (memberId != null) {
+            builder.and(member.id.eq(memberId));
+        }
+
+        Member result = queryFactory.selectFrom(member)
+                .where(builder)
+                .fetchOne();
+
+        return Optional.ofNullable(result);
     }
 }
+

@@ -1,32 +1,24 @@
 package umc.spring.service.MissionService;
 
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import umc.spring.domain.Store;
-import umc.spring.repository.StoreRepository.StoreRepository;
+import umc.spring.domain.Mission;
+import umc.spring.repository.MissionRepository.MissionRepository;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
-@RequiredArgsConstructor
-@Transactional(readOnly = true)
+@Transactional
 public class MissionQueryServiceImpl implements MissionQueryService {
 
-    private final StoreRepository storeRepository;
+    private final MissionRepository missionRepository;
 
-    @Override
-    public Optional<Store> findStore(Long id) {
-        return storeRepository.findById(id);
+    public MissionQueryServiceImpl(MissionRepository missionRepository) {
+        this.missionRepository = missionRepository;
     }
 
     @Override
-    public List<Store> findStoresByNameAndScore(String name, Float score) {
-        List<Store> filteredStores = storeRepository.dynamicQueryWithBooleanBuilder(name, score);
-
-        filteredStores.forEach(store -> System.out.println("Store: " + store));
-
-        return filteredStores;
+    public List<Mission> getAvailableMissions(String regionName, Long cursor, Long memberId) {
+        return missionRepository.findMissions(regionName, cursor, memberId);
     }
 }

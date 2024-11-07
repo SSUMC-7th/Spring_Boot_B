@@ -1,12 +1,9 @@
 package umc.spring.service.MissionService;
 
-import umc.spring.domain.Store;
+import umc.spring.domain.Mission;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface MissionQueryService {
-
-    Optional<Store> findStore(Long id);
-    List<Store> findStoresByNameAndScore(String name, Float score);
+    List<Mission> getAvailableMissions(String regionName, Long cursor, Long memberId);
 }

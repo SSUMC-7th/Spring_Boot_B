@@ -1,12 +1,8 @@
 package umc.spring.service.MemberService;
 
-import umc.spring.domain.Store;
-
-import java.util.List;
+import umc.spring.domain.Member;
 import java.util.Optional;
 
 public interface MemberQueryService {
-
-    Optional<Store> findStore(Long id);
-    List<Store> findStoresByNameAndScore(String name, Float score);
+    Optional<Member> getMemberById(Long memberId);
 }
