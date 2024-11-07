@@ -4,6 +4,9 @@ import jakarta.persistence.*;
 import lombok.*;
 import umc.spring.domain.common.BaseEntity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 @Entity
 @Getter
@@ -19,10 +22,13 @@ public class Restaurant extends BaseEntity{
     @Column(nullable = false, length = 255)
     private String name;
 
-    @Column(nullable = false, length = 100)
+    @Column(length = 100)
     private String category;
 
     private Float score;
+
+    @Column(length = 100)
+    private String address;
 
     @Column(length = 100)
     private String addressBig; //시
@@ -32,4 +38,25 @@ public class Restaurant extends BaseEntity{
 
     @Column(length = 100)
     private String addressSmall;  //동
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(nullable = false, name = "region_id")
+    private Region region;
+
+    @OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL)
+    private List<Mission> missionList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL)
+    private List<Review> reviewList = new ArrayList<>();
+
+    @Override
+    public String toString() {
+        return "Restaurant{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                ", score=" + score +
+                ", region=" + (region != null ? region.getName() : "N/A") + // region의 이름 출력
+                '}';
+    }
 }
