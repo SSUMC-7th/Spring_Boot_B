@@ -1,4 +1,4 @@
-package umc.spring.service.RegionService;
+package umc.spring.service.ReviewService;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -12,7 +12,7 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
-public class RegionQueryServiceImpl implements RegionQueryService {
+public class ReviewQueryServiceImpl implements ReviewQueryService {
 
     private final StoreRepository storeRepository;
 
