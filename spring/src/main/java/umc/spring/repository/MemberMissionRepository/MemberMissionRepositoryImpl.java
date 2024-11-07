@@ -39,13 +39,7 @@ public class MemberMissionRepositoryImpl implements MemberMissionRepositoryCusto
         }
 
         List<MemberMission> result = jpaQueryFactory
-                .select(new QMemberMission(
-                        mission.id,
-                        store.name,
-                        mission.reward,
-                        mission.missionSpec,
-                        memberMission.status
-                ))
+                .select(memberMission)
                 .from(member)
                 .join(memberMission).on(member.id.eq(memberMission.member.id))
                 .join(mission).on(memberMission.mission.id.eq(mission.id))
