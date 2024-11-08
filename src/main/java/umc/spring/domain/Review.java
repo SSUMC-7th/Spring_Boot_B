@@ -20,15 +20,29 @@ public class Review extends BaseEntity {
 
     private String title;
 
+    private String body;
+
     private Float score;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "store_id")
+    private Store store;
+
     @OneToMany(mappedBy = "review", cascade = CascadeType.ALL)
     private List<Comment> commentList = new ArrayList<>();
 
     @OneToMany(mappedBy = "review", cascade = CascadeType.ALL)
     private List<ReviewImage> reviewImageList = new ArrayList<>();
+
+    public Review(Member member, Store store, String body, float score) {
+        this.member = member;
+        this.store = store;
+        this.body = body;
+        this.score = score;
+    }
+
 }
