@@ -50,6 +50,9 @@ public class Member extends BaseEntity {
     @Column(nullable = false, length = 50)
     private String email;
 
+    @Column(length = 15)
+    private String phoneNumber;
+
     private Integer point;
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
