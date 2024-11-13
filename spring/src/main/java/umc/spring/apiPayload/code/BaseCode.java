@@ -4,8 +4,8 @@ import java.awt.desktop.UserSessionEvent;
 
 public interface BaseCode {
 
-    UserSessionEvent.Reason getReason();
+    ReasonDTO getReason();
 
-    UserSessionEvent.Reason getReasonHttpStatus();
+    ReasonDTO getReasonHttpStatus();
 
 }
