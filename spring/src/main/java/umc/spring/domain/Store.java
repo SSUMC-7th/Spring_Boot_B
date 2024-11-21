@@ -3,7 +3,6 @@ package umc.spring.domain;
 import jakarta.persistence.*;
 import lombok.*;
 import umc.spring.domain.common.BaseEntity;
-import umc.spring.domain.enums.FoodCategory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,9 +25,6 @@ public class Store extends BaseEntity {
 
     @Column(nullable = false, length = 40)
     private String address;
-
-    @Enumerated(EnumType.STRING)
-    private FoodCategory foodCategory;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "region_id")

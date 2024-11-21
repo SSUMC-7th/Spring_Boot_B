@@ -10,6 +10,7 @@ spring:
   jpa:
     properties:
       hibernate:
+        #dialect: org.hibernate.dialect.MYSQL8Dialect -> Dialect 찾지 못해서 제외함
         show_sql: true
         format_sql: true
         use_sql_comments: true

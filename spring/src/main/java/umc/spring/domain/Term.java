@@ -3,7 +3,7 @@ package umc.spring.domain;
 import jakarta.persistence.*;
 import lombok.*;
 import umc.spring.domain.common.BaseEntity;
-import umc.spring.domain.mapping.MemberAgreeTerm;
+import umc.spring.domain.mapping.MemberAgree;
 import umc.spring.domain.mapping.MemberMission;
 
 import java.util.ArrayList;
@@ -30,5 +30,5 @@ public class Term extends BaseEntity {
     private Boolean agreeOptional;
 
     @OneToMany(mappedBy = "term", cascade = CascadeType.ALL)
-    private List<MemberAgreeTerm> memberTermList = new ArrayList<>();
+    private List<MemberAgree> memberAgreeList = new ArrayList<>();
 }

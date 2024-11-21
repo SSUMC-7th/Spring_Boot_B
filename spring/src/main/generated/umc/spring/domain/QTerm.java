@@ -31,7 +31,7 @@ public class QTerm extends EntityPathBase<Term> {
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
-    public final ListPath<umc.spring.domain.mapping.MemberAgreeTerm, umc.spring.domain.mapping.QMemberAgreeTerm> memberTermList = this.<umc.spring.domain.mapping.MemberAgreeTerm, umc.spring.domain.mapping.QMemberAgreeTerm>createList("memberTermList", umc.spring.domain.mapping.MemberAgreeTerm.class, umc.spring.domain.mapping.QMemberAgreeTerm.class, PathInits.DIRECT2);
+    public final ListPath<umc.spring.domain.mapping.MemberAgree, umc.spring.domain.mapping.QMemberAgree> memberAgreeList = this.<umc.spring.domain.mapping.MemberAgree, umc.spring.domain.mapping.QMemberAgree>createList("memberAgreeList", umc.spring.domain.mapping.MemberAgree.class, umc.spring.domain.mapping.QMemberAgree.class, PathInits.DIRECT2);
 
     public final StringPath name = createString("name");
 
