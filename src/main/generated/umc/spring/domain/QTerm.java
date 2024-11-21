@@ -1,0 +1,54 @@
+package umc.spring.domain;
+
+import static com.querydsl.core.types.PathMetadataFactory.*;
+
+import com.querydsl.core.types.dsl.*;
+
+import com.querydsl.core.types.PathMetadata;
+import javax.annotation.processing.Generated;
+import com.querydsl.core.types.Path;
+import com.querydsl.core.types.dsl.PathInits;
+
+
+/**
+ * QTerm is a Querydsl query type for Term
+ */
+@Generated("com.querydsl.codegen.DefaultEntitySerializer")
+public class QTerm extends EntityPathBase<Term> {
+
+    private static final long serialVersionUID = -1348088040L;
+
+    public static final QTerm term = new QTerm("term");
+
+    public final umc.spring.domain.common.QBaseEntity _super = new umc.spring.domain.common.QBaseEntity(this);
+
+    public final BooleanPath agreeOptional = createBoolean("agreeOptional");
+
+    public final StringPath content = createString("content");
+
+    //inherited
+    public final DateTimePath<java.time.LocalDateTime> createdAt = _super.createdAt;
+
+    public final NumberPath<Long> id = createNumber("id", Long.class);
+
+    public final ListPath<umc.spring.domain.mapping.MemberAgreeTerm, umc.spring.domain.mapping.QMemberAgreeTerm> memberTermList = this.<umc.spring.domain.mapping.MemberAgreeTerm, umc.spring.domain.mapping.QMemberAgreeTerm>createList("memberTermList", umc.spring.domain.mapping.MemberAgreeTerm.class, umc.spring.domain.mapping.QMemberAgreeTerm.class, PathInits.DIRECT2);
+
+    public final StringPath name = createString("name");
+
+    //inherited
+    public final DateTimePath<java.time.LocalDateTime> updatedAt = _super.updatedAt;
+
+    public QTerm(String variable) {
+        super(Term.class, forVariable(variable));
+    }
+
+    public QTerm(Path<? extends Term> path) {
+        super(path.getType(), path.getMetadata());
+    }
+
+    public QTerm(PathMetadata metadata) {
+        super(Term.class, metadata);
+    }
+
+}
+
