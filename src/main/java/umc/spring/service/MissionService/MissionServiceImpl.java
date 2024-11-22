@@ -30,4 +30,8 @@ public class MissionServiceImpl implements MissionService {
         Mission mission = MissionConverter.toMission(request, store);
         return missionRepository.save(mission);
     }
+
+    public boolean doesMissionExist(Long missionId) {
+        return missionRepository.existsById(missionId);
+    }
 }
