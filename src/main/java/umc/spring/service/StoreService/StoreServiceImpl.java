@@ -30,4 +30,8 @@ public class StoreServiceImpl implements StoreService {
        Store newStore = StoreConverter.toStore(request, region);
        return storeRepository.save(newStore);
     }
+
+    public boolean doesStoreExist(Long storeId) {
+        return storeRepository.existsById(storeId);
+    }
 }
