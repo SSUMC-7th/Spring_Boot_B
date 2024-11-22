@@ -14,7 +14,7 @@ public class ReviewResponseDTO {
     @NoArgsConstructor
     @AllArgsConstructor
     public static class JoinResultDTO {
-        Long id;
+        Long reviewId;
         LocalDateTime createdAt;
     }
 }
