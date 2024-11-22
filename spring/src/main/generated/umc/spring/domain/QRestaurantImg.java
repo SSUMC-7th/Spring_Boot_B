@@ -54,7 +54,7 @@ public class QRestaurantImg extends EntityPathBase<RestaurantImg> {
 
     public QRestaurantImg(Class<? extends RestaurantImg> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
-        this.restaurant = inits.isInitialized("restaurant") ? new QRestaurant(forProperty("restaurant")) : null;
+        this.restaurant = inits.isInitialized("restaurant") ? new QRestaurant(forProperty("restaurant"), inits.get("restaurant")) : null;
     }
 
 }
