@@ -22,7 +22,7 @@ public class StoreRestController {
     private final StoreCommandService storeCommandService;
 
     @PostMapping("/")
-    public ApiResponse<StoreResponseDTO.CreateResultDto> addStore(@RequestBody @Valid StoreRequestDTO.CreateDto request) {
+    public ApiResponse<StoreResponseDTO.CreateStoreResultDto> addStore(@RequestBody @Valid StoreRequestDTO.CreateStoreDto request) {
         Store store = storeCommandService.addStore(request);
         return ApiResponse.onSuccess(StoreConverter.toCreateResultDto(store));
     }

@@ -21,7 +21,7 @@ public class MissionRestController {
     private final MissionCommandService missionCommandService;
 
     @PostMapping("/")
-    public ApiResponse<MissionResponseDTO.CreateResultDto> addMission(@RequestBody @Valid MissionRequestDTO.CreateDto request) {
+    public ApiResponse<MissionResponseDTO.CreateMissionResultDto> addMission(@RequestBody @Valid MissionRequestDTO.CreateMissionDto request) {
         Mission mission = missionCommandService.addMission(request);
         return ApiResponse.onSuccess(MissionConverter.toCreateResultDto(mission));
     }

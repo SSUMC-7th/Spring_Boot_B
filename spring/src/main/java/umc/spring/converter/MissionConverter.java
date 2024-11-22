@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 
 public class MissionConverter {
 
-    public static Mission toMission(MissionRequestDTO.CreateDto request, Store store) {
+    public static Mission toMission(MissionRequestDTO.CreateMissionDto request, Store store) {
         return Mission.builder()
                 .missionSpec(request.getMissionSpec())
                 .reward(request.getReward())
@@ -18,8 +18,8 @@ public class MissionConverter {
                 .build();
     }
 
-    public static MissionResponseDTO.CreateResultDto toCreateResultDto(Mission mission) {
-        return MissionResponseDTO.CreateResultDto.builder()
+    public static MissionResponseDTO.CreateMissionResultDto toCreateResultDto(Mission mission) {
+        return MissionResponseDTO.CreateMissionResultDto.builder()
                 .missionId(mission.getId())
                 .storeId(mission.getStore().getId())
                 .missionSpec(mission.getMissionSpec())

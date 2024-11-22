@@ -12,8 +12,7 @@ public class MemberMissionResponseDTO {
     @Builder
     @NoArgsConstructor
     @AllArgsConstructor
-    @Schema(name = "MemberMissionCreateResultDto")
-    public static class CreateResultDto {
+    public static class CreateMemberMissionDto {
         private Long memberMissionId;
         private Long memberId;
         private Long missionId;

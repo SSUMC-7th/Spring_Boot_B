@@ -18,8 +18,7 @@ public class MissionRequestDTO {
     @Builder
     @NoArgsConstructor
     @AllArgsConstructor
-    @Schema(name = "MissionCreateDto")
-    public static class CreateDto {
+    public static class CreateMissionDto {
         @NotNull
         private Long storeId;
 

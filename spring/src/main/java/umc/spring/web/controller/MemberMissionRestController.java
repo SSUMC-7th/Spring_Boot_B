@@ -21,8 +21,8 @@ public class MemberMissionRestController {
     private final MemberMissionCommandService memberMissionCommandService;
 
     @PostMapping("/")
-    public ApiResponse<MemberMissionResponseDTO.CreateResultDto> addMemberMission(
-            @RequestBody @Valid MemberMissionRequestDTO.CreateDto request) {
+    public ApiResponse<MemberMissionResponseDTO.CreateMemberMissionDto> addMemberMission(
+            @RequestBody @Valid MemberMissionRequestDTO.CreateMemberMissionDto request) {
         MemberMission memberMission = memberMissionCommandService.addMemberMission(request);
         return ApiResponse.onSuccess(MemberMissionConverter.toCreateResultDto(memberMission));
     }

@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 
 public class ReviewConverter {
 
-    public static Review toReview(ReviewRequestDTO.CreateDto request, Store store) {
+    public static Review toReview(ReviewRequestDTO.CreateReviewDto request, Store store) {
         return Review.builder()
                 .store(store)
                 .content(request.getContent())
@@ -17,8 +17,8 @@ public class ReviewConverter {
                 .build();
     }
 
-    public static ReviewResponseDTO.CreateResultDto toCreateResultDto(Review review) {
-        return ReviewResponseDTO.CreateResultDto.builder()
+    public static ReviewResponseDTO.CreateReviewResultDto toCreateResultDto(Review review) {
+        return ReviewResponseDTO.CreateReviewResultDto.builder()
                 .reviewId(review.getId())
                 .storeId(review.getStore().getId())
                 .content(review.getContent())

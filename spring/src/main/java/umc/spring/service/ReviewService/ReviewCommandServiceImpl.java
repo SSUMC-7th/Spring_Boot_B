@@ -23,7 +23,7 @@ public class ReviewCommandServiceImpl implements ReviewCommandService {
 
     @Override
     @Transactional
-    public ReviewResponseDTO.CreateResultDto addReview(ReviewRequestDTO.CreateDto request) {
+    public ReviewResponseDTO.CreateReviewResultDto addReview(ReviewRequestDTO.CreateReviewDto request) {
         Store store = storeRepository.findById(request.getStoreId())
                 .orElseThrow(() -> new StoreHandler(ErrorStatus.STORE_NOT_FOUND));
 

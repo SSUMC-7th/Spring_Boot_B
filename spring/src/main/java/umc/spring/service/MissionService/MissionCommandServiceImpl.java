@@ -21,7 +21,7 @@ public class MissionCommandServiceImpl implements MissionCommandService {
 
     @Override
     @Transactional
-    public Mission addMission(MissionRequestDTO.CreateDto request) {
+    public Mission addMission(MissionRequestDTO.CreateMissionDto request) {
         Store store = storeRepository.findById(request.getStoreId())
                 .orElseThrow(() -> new StoreHandler(ErrorStatus.STORE_NOT_FOUND));
 

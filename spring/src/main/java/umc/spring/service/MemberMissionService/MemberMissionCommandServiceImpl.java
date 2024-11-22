@@ -25,16 +25,16 @@ public class MemberMissionCommandServiceImpl implements MemberMissionCommandServ
 
     @Override
     @Transactional
-    public MemberMission addMemberMission(MemberMissionRequestDTO.CreateDto request) {
+    public MemberMission addMemberMission(MemberMissionRequestDTO.CreateMemberMissionDto request) {
         Member member = memberRepository.findById(request.getMemberId())
                 .orElseThrow(() -> new MemberHandler(ErrorStatus.MEMBER_NOT_FOUND));
 
         Mission mission = missionRepository.findById(request.getMissionId())
                 .orElseThrow(() -> new MissionHandler(ErrorStatus.MISSION_NOT_FOUND));
 
-        MemberMission memberMission = MemberMissionConverter.toMemberMission(member, mission);
+        MemberMission newMemberMission = MemberMissionConverter.toMemberMission(member, mission);
 
-        return memberMissionRepository.save(memberMission);
+        return memberMissionRepository.save(newMemberMission);
     }
 }
 

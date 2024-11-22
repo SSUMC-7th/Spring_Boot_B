@@ -11,7 +11,7 @@ public class ReviewResponseDTO {
     @Builder
     @NoArgsConstructor
     @AllArgsConstructor
-    public static class CreateResultDto {
+    public static class CreateReviewResultDto {
         private Long reviewId;
         private Long storeId;
         private String content;

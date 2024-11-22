@@ -16,8 +16,8 @@ public class MemberMissionConverter {
                 .build();
     }
 
-    public static MemberMissionResponseDTO.CreateResultDto toCreateResultDto(MemberMission memberMission) {
-        return MemberMissionResponseDTO.CreateResultDto.builder()
+    public static MemberMissionResponseDTO.CreateMemberMissionDto toCreateResultDto(MemberMission memberMission) {
+        return MemberMissionResponseDTO.CreateMemberMissionDto.builder()
                 .memberMissionId(memberMission.getId())
                 .memberId(memberMission.getMember().getId())
                 .missionId(memberMission.getMission().getId())

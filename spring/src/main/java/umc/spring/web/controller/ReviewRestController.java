@@ -19,8 +19,8 @@ public class ReviewRestController {
     private final ReviewCommandService reviewCommandService;
 
     @PostMapping("/")
-    public ApiResponse<ReviewResponseDTO.CreateResultDto> addReview(@RequestBody @Valid ReviewRequestDTO.CreateDto request) {
-        ReviewResponseDTO.CreateResultDto result = reviewCommandService.addReview(request);
+    public ApiResponse<ReviewResponseDTO.CreateReviewResultDto> addReview(@RequestBody @Valid ReviewRequestDTO.CreateReviewDto request) {
+        ReviewResponseDTO.CreateReviewResultDto result = reviewCommandService.addReview(request);
         return ApiResponse.onSuccess(result);
     }
 }
