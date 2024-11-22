@@ -3,6 +3,8 @@ package umc.spring.web.dto;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
+import umc.spring.validation.annotation.ExistRegions;
+import umc.spring.validation.annotation.ExistStores;
 
 public class StoreRequestDTO {
 
@@ -11,7 +13,7 @@ public class StoreRequestDTO {
         @NotBlank
         private String name;
 
-        @NotNull
+        @ExistRegions
         private Long regionId;
 
         @NotBlank

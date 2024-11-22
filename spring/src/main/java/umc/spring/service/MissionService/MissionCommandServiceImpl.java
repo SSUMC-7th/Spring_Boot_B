@@ -25,8 +25,8 @@ public class MissionCommandServiceImpl implements MissionCommandService {
         Store store = storeRepository.findById(request.getStoreId())
                 .orElseThrow(() -> new StoreHandler(ErrorStatus.STORE_NOT_FOUND));
 
-        Mission mission = MissionConverter.toMission(request, store);
-        return missionRepository.save(mission);
+        Mission newMission = MissionConverter.toMission(request, store);
+        return missionRepository.save(newMission);
     }
 }
 

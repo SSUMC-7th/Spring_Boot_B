@@ -20,7 +20,7 @@ public class MemberMissionProgressedValidator implements ConstraintValidator<Pro
     public boolean isValid(MemberMissionRequestDTO.CreateMemberMissionDto request, ConstraintValidatorContext context) {
         // Check if there is any mission in progress for the given member
         boolean hasProgressMission = memberMissionRepository
-                .findMissionsByMemberAndStatus(request.getMemberId(), "PROGRESS", null, Pageable.unpaged())
+                .findMissionsByMemberAndStatus(request.getMemberId(), "IN_PROGRESS", null, Pageable.unpaged())
                 .getTotalElements() > 0;
 
         return !hasProgressMission; // Return true if no mission is in progress

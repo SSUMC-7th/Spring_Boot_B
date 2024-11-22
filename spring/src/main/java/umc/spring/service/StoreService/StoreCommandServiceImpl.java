@@ -27,10 +27,10 @@ public class StoreCommandServiceImpl implements StoreCommandService {
         Region region = regionRepository.findById(request.getRegionId())
                 .orElseThrow(() -> new RegionHandler(ErrorStatus.REGION_NOT_FOUND));
 
-        Store store = StoreConverter.toStore(request, region);
-        storeRepository.save(store);
+        Store newStore = StoreConverter.toStore(request, region);
+        storeRepository.save(newStore);
 
-        return store;
+        return newStore;
     }
 }
 

@@ -9,6 +9,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import umc.spring.validation.annotation.ExistStores;
 
 import java.time.LocalDate;
 
@@ -19,7 +20,7 @@ public class MissionRequestDTO {
     @NoArgsConstructor
     @AllArgsConstructor
     public static class CreateMissionDto {
-        @NotNull
+        @ExistStores
         private Long storeId;
 
         @NotBlank
