@@ -14,7 +14,7 @@ public class ReviewRequestDTO {
     @NoArgsConstructor
     @AllArgsConstructor
     public static class CreateDto {
-        @NotNull
+        @ExistStores
         private Long storeId;
 
         @NotNull
