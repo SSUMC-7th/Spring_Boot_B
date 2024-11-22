@@ -11,7 +11,7 @@ public class StoreConverter {
 
     public static StoreResponseDTO.JoinResultDTO toJoinResultDTO(Store store) {
         return StoreResponseDTO.JoinResultDTO.builder()
-                .id(store.getId())
+                .storeId(store.getId())
                 .createdAt(LocalDateTime.now())
                 .build();
     }

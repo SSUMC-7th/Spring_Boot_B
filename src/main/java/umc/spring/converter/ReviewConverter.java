@@ -12,7 +12,7 @@ public class ReviewConverter {
 
     public static ReviewResponseDTO.JoinResultDTO toJoinResultDTO(Review review) {
         return ReviewResponseDTO.JoinResultDTO.builder()
-                .id(review.getId())
+                .reviewId(review.getId())
                 .createdAt(LocalDateTime.now())
                 .build();
     }
