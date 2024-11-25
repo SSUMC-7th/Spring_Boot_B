@@ -20,7 +20,7 @@ public enum ErrorStatus implements BaseErrorCode {
     MEMBER_NOT_FOUND(HttpStatus.BAD_REQUEST, "MEMBER4001", "사용자가 없습니다."),
     NICKNAME_NOT_EXIST(HttpStatus.BAD_REQUEST, "MEMBER4002", "닉네임은 필수 입니다."),
 
-    MISSION_NOT_FOUND(HttpStatus.BAD_REQUEST, "MISSION4001", "미션이 없습니다."),
+    MISSION_NOT_FOUND(HttpStatus.BAD_REQUEST, "MISSION4001", "해당 미션이 없습니다."),
 
     // 예시,,,
     ARTICLE_NOT_FOUND(HttpStatus.NOT_FOUND, "ARTICLE4001", "게시글이 없습니다."),
@@ -29,13 +29,13 @@ public enum ErrorStatus implements BaseErrorCode {
     TEMP_EXCEPTION(HttpStatus.BAD_REQUEST, "TEMP4001", "이거는 테스트"),
 
     //for food Category
-    FOOD_CATEGORY_NOT_FOUND(HttpStatus.BAD_REQUEST, "FOODCATEGORY4011", "음식 카테고리가 없습니다."),
+    FOOD_CATEGORY_NOT_FOUND(HttpStatus.BAD_REQUEST, "FOODCATEGORY4001", "음식 카테고리가 없습니다."),
 
     //for store
-    STORE_NOT_FOUND(HttpStatus.BAD_REQUEST, "STORE4031", "해당 식당이 없습니다."),
+    STORE_NOT_FOUND(HttpStatus.BAD_REQUEST, "STORE4001", "해당 식당이 없습니다."),
 
     //for region
-    REGION_NOT_FOUND(HttpStatus.BAD_REQUEST, "REGION4021", "해당 지역이 없습니다.");
+    REGION_NOT_FOUND(HttpStatus.BAD_REQUEST, "REGION4001", "해당 지역이 없습니다.");
 
     private final HttpStatus httpStatus;
     private final String code;
