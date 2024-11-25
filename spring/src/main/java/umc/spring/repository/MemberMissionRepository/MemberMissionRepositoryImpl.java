@@ -8,9 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
-import umc.spring.domain.QMember;
-import umc.spring.domain.QMission;
-import umc.spring.domain.QStore;
+import umc.spring.domain.*;
 import umc.spring.domain.enums.MissionStatus;
 import umc.spring.domain.mapping.MemberMission;
 import umc.spring.domain.mapping.QMemberMission;
@@ -50,5 +48,16 @@ public class MemberMissionRepositoryImpl implements MemberMissionRepositoryCusto
                 .fetch();
 
         return new PageImpl<>(result, pageable, result.size());
+    }
+
+    @Override
+    public MemberMission findByMemberAndMission(Member member, Mission mission) {
+        QMemberMission memberMission = QMemberMission.memberMission;
+
+        return jpaQueryFactory
+                .selectFrom(memberMission)
+                .where(memberMission.member.eq(member)
+                        .and(memberMission.mission.eq(mission)))
+                .fetchOne();
     }
 }

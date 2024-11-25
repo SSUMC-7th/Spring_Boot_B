@@ -6,7 +6,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 import umc.spring.repository.MemberMissionRepository.MemberMissionRepository;
-import umc.spring.repository.MemberMissionRepository.MemberMissionRepositoryCustom;
 import umc.spring.validation.annotation.ProgressMemberMission;
 import umc.spring.web.dto.MemberMissionRequestDTO;
 

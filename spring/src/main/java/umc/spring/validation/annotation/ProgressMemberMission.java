@@ -15,4 +15,3 @@ public @interface ProgressMemberMission {
     String message() default "해당 미션은 이미 진행중입니다.";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};}
-
