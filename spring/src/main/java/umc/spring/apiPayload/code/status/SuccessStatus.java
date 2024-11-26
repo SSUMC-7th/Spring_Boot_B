@@ -18,7 +18,8 @@ public enum SuccessStatus implements BaseCode {
     RESTAURANT_CREATE_OK(HttpStatus.OK, "RESTAURANT201", "레스토랑 등록 성공"),
 
     // 미션 관련 응답
-    MISSION_CREATE_OK(HttpStatus.OK, "MISSION201", "미션 등록 성공");
+    MISSION_CREATE_OK(HttpStatus.OK, "MISSION201", "미션 등록 성공"),
+    MEMBER_MISSION_CREATE_OK(HttpStatus.OK, "MISSION202", "챌린지 중인 미션 등록 성공");
 
     private final HttpStatus httpStatus;
     private final String code;
