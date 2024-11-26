@@ -12,8 +12,10 @@ public enum SuccessStatus implements BaseCode {
     _OK(HttpStatus.OK, "COMMON200", "성공입니다."),
     // 멤버 관련 응답
     // 리뷰 관련 응답
-    REVIEW_CREATE_OK(HttpStatus.OK, "REVIEW201", "리뷰 등록 성공");
+    REVIEW_CREATE_OK(HttpStatus.OK, "REVIEW201", "리뷰 등록 성공"),
 
+    // 미션 관련 응답
+    MISSION_CREATE_OK(HttpStatus.OK, "MISSION201", "미션 등록 성공");
 
     private final HttpStatus httpStatus;
     private final String code;
