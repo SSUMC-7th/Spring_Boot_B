@@ -51,12 +51,22 @@ public class ReviewQueryServiceImpl implements ReviewQueryService {
     }
 
     @Override
-    public Page<Review> getReviewList(Long storeId, Integer page) {
+    public Page<Review> getStoreReviewList(Long storeId, Integer page) {
 
         Store store = storeRepository.findById(storeId)
                 .orElseThrow(() -> new StoreHandler(ErrorStatus.STORE_NOT_FOUND));
 
         Page<Review> ReviewPage = reviewRepository.findAllByStore(store, PageRequest.of(page, 10));
+        return ReviewPage;
+    }
+
+    @Override
+    public Page<Review> getMemberReviewList(Long memberId, Integer page){
+
+        Member member = memberRepository.findById(memberId)
+                .orElseThrow(() -> new MemberHandler(ErrorStatus.MEMBER_NOT_FOUND));
+
+        Page<Review> ReviewPage = reviewRepository.findAllByMember(member, PageRequest.of(page, 10));
         return ReviewPage;
     }
 }

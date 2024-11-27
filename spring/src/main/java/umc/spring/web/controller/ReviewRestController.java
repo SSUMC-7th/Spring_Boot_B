@@ -36,7 +36,7 @@ public class ReviewRestController {
         return ApiResponse.onSuccess(result);
     }
 
-    @GetMapping("/{storeId}")
+    @GetMapping("/store/{storeId}")
     @Operation(summary = "특정 가게의 리뷰 목록 조회 API",description = "특정 가게의 리뷰들의 목록을 조회하는 API이며, 페이징을 포함합니다. query String 으로 page 번호를 주세요")
     @ApiResponses({
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "COMMON200",description = "OK, 성공"),
@@ -50,7 +50,18 @@ public class ReviewRestController {
     })
     public ApiResponse<ReviewResponseDTO.ReviewPreViewListDTO> getReviewList(@ExistStore @PathVariable(name = "storeId") Long storeId, @CheckPage @RequestParam(name = "page") Integer page){
         int actualPage = page - 1;
-        Page<Review> reviewList = reviewQueryService.getReviewList(storeId, actualPage);
+        Page<Review> reviewList = reviewQueryService.getStoreReviewList(storeId, actualPage);
+        return ApiResponse.onSuccess(ReviewConverter.reviewPreViewListDTO(reviewList));
+    }
+    @GetMapping("/member/{memberId}")
+    @Operation(summary = "유저의 리뷰 목록 조회 API",description = "유저의 리뷰들의 목록을 조회하는 API이며, 페이징을 포함합니다. query String 으로 page 번호를 주세요")
+    @Parameters({
+            @Parameter(name = "memberId", description = "유저의 아이디, path variable 입니다!"),
+            @Parameter(name = "page", description = "페이지 번호, query string 입니다!")
+    })
+    public ApiResponse<ReviewResponseDTO.ReviewPreViewListDTO> getMemberReviewList(@PathVariable(name = "memberId") Long memberId, @CheckPage @RequestParam(name = "page") Integer page){
+        int actualPage = page - 1;
+        Page<Review> reviewList = reviewQueryService.getMemberReviewList(memberId, actualPage);
         return ApiResponse.onSuccess(ReviewConverter.reviewPreViewListDTO(reviewList));
     }
 }
