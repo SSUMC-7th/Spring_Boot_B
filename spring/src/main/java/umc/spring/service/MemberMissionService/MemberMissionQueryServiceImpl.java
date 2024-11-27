@@ -19,6 +19,6 @@ public class MemberMissionQueryServiceImpl implements MemberMissionQueryService 
 
     @Override
     public Page<MemberMission> getMissionsByMemberAndStatus(Long memberId, String status, Long cursor, Pageable pageable) {
-        return memberMissionRepository.findMissionsByMemberAndStatus(memberId, status, cursor, pageable);
+        return memberMissionRepository.findMemberMissionsByMemberAndStatus(memberId, status, cursor, pageable);
     }
 }

@@ -46,5 +46,16 @@ public class MissionRestController {
         Page<Mission> missions = missionQueryService.getMissionsByStore(storeId, actualPage);
         return ApiResponse.onSuccess(MissionConverter.missionPreViewListDTO(missions));
     }
+    @GetMapping("/{memberId}/missions/inProgress")
+    @Operation(summary = "유저의 진행 중인 미션 목록 조회", description = "유저의 진행 중인 미션 목록을 페이징하여 조회합니다.")
+    @Parameters({
+            @Parameter(name = "memberId", description = "유저의 아이디, path variable 입니다!"),
+            @Parameter(name = "page", description = "페이지 번호, query string 입니다!")
+    })
+    public ApiResponse<MissionResponseDTO.MissionPreViewListDTO> getInProgressMissionsByMember(@PathVariable Long memberId, @CheckPage @RequestParam Integer page) {
+        int actualPage = page - 1;
+        Page<Mission> missions = missionQueryService.getInProgressMissionsByMember(memberId, actualPage);
+        return ApiResponse.onSuccess(MissionConverter.missionPreViewListDTO(missions));
+    }
 }
 
