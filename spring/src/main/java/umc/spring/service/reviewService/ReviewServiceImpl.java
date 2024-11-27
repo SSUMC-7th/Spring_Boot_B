@@ -1,6 +1,8 @@
 package umc.spring.service.reviewService;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import umc.spring.converter.ReviewConverter;
 import umc.spring.domain.Member;
@@ -20,13 +22,20 @@ public class ReviewServiceImpl implements ReviewService{
     private final MemberRepository memberRepository;
 
     @Override
-    public Review addReview(ReviewRequestDTO.AddReviewDTO request){
-        Restaurant restaurant = restaurantRepository.findById(request.getRestaurantId())
+    public Review addReview(ReviewRequestDTO.AddReviewDTO request, Long restaurantId){
+        Restaurant restaurant = restaurantRepository.findById(restaurantId)
                 .orElseThrow();
         Member member = memberRepository.findById(request.getMemberId())
                 .orElseThrow();
         Review review = ReviewConverter.toReview(request, restaurant, member);
         reviewRepository.save(review);
         return review;
+    }
+
+    @Override
+    public Page<Review> getReviewList(Long restaurantId, Integer page) {
+        Restaurant restaurant = restaurantRepository.findById(restaurantId).orElseThrow();
+
+        return reviewRepository.findAllByRestaurant(restaurant, PageRequest.of(page, 10));
     }
 }
