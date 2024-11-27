@@ -1,7 +1,6 @@
 package umc.spring.web.controller;
 
 import jakarta.validation.Valid;
-import jakarta.validation.executable.ValidateOnExecution;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,7 +11,7 @@ import umc.spring.apiPayload.ApiResponse;
 import umc.spring.converter.MemberMissionConverter;
 import umc.spring.domain.mapping.MemberMission;
 import umc.spring.service.MemberMissionService.MemberMissionCommandService;
-import umc.spring.validation.annotation.CheckProgressMemberMission;
+import umc.spring.validation.annotation.CheckMemberMissionInProgress;
 import umc.spring.web.dto.MemberMissionRequestDTO;
 import umc.spring.web.dto.MemberMissionResponseDTO;
 
@@ -26,7 +25,7 @@ public class MemberMissionRestController {
 
     @PostMapping("/")
     public ApiResponse<MemberMissionResponseDTO.CreateMemberMissionDto> addMemberMission(
-            @RequestBody @Valid @CheckProgressMemberMission MemberMissionRequestDTO.CreateMemberMissionDto request) {
+            @RequestBody @Valid @CheckMemberMissionInProgress MemberMissionRequestDTO.CreateMemberMissionDto request) {
         MemberMission memberMission = memberMissionCommandService.makeMemberMissionInProgress(request);
         return ApiResponse.onSuccess(MemberMissionConverter.toCreateResultDto(memberMission));
     }
