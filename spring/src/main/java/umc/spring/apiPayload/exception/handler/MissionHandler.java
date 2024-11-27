@@ -4,7 +4,6 @@ import umc.spring.apiPayload.code.BaseErrorCode;
 import umc.spring.apiPayload.exception.GeneralException;
 
 public class MissionHandler extends GeneralException {
-    public MissionHandler(BaseErrorCode errorCode) {
-        super(errorCode);
-    }
+
+    public MissionHandler(BaseErrorCode code) {super(code);}
 }

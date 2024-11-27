@@ -6,7 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import umc.spring.validation.annotation.ExistStores;
+import umc.spring.validation.annotation.ExistStore;
 
 public class ReviewRequestDTO {
 
@@ -15,7 +15,7 @@ public class ReviewRequestDTO {
     @NoArgsConstructor
     @AllArgsConstructor
     public static class CreateReviewDto {
-        @ExistStores
+        @ExistStore
         private Long storeId;
 
         @NotNull

@@ -3,6 +3,10 @@ package umc.spring.service.MemberMissionService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import umc.spring.apiPayload.code.status.ErrorStatus;
+import umc.spring.apiPayload.exception.handler.MemberHandler;
+import umc.spring.apiPayload.exception.handler.MemberMissionHandler;
+import umc.spring.apiPayload.exception.handler.MissionHandler;
 import umc.spring.domain.Member;
 import umc.spring.domain.Mission;
 import umc.spring.domain.enums.MissionStatus;
@@ -21,28 +25,20 @@ public class MemberMissionCommandServiceImpl implements MemberMissionCommandServ
     private final MemberRepository memberRepository;
 
     @Transactional
-    public MemberMission addMemberMission(MemberMissionRequestDTO.CreateMemberMissionDto request) {
+    public MemberMission makeMemberMissionInProgress(MemberMissionRequestDTO.CreateMemberMissionDto request) {
         Member member = memberRepository.findById(request.getMemberId())
-                .orElseThrow(() -> new IllegalArgumentException("Member not found"));
+                .orElseThrow(() -> new MemberHandler(ErrorStatus.MEMBER_NOT_FOUND));
         Mission mission = missionRepository.findById(request.getMissionId())
-                .orElseThrow(() -> new IllegalArgumentException("Mission not found"));
+                .orElseThrow(() -> new MissionHandler(ErrorStatus.MISSION_NOT_FOUND));
 
         // 동일한 멤버와 미션으로 매핑된 MemberMission 엔티티가 있는지 확인
-        MemberMission existingMemberMission = memberMissionRepository.findByMemberAndMission(member, mission);
+        MemberMission existingMemberMission = memberMissionRepository.findByMemberAndMission(member.getId(), mission.getId())
+                        .orElseThrow(() -> new MemberMissionHandler(ErrorStatus.MEMBER_MISSION_NOT_FOUND));
 
-        if (existingMemberMission != null) {
-            // 이미 존재하는 경우 상태를 IN_PROGRESS로 변경
-            existingMemberMission.setStatus(MissionStatus.IN_PROGRESS);
-            return existingMemberMission;
-        } else {
-            // 존재하지 않는 경우 새로운 MemberMission 생성
-            MemberMission newMemberMission = MemberMission.builder()
-                    .member(member)
-                    .mission(mission)
-                    .status(MissionStatus.IN_PROGRESS)
-                    .build();
+        // 이미 존재하는 경우 상태를 IN_PROGRESS로 변경
+        existingMemberMission.setStatus(MissionStatus.IN_PROGRESS);
 
-            return memberMissionRepository.save(newMemberMission);
-        }
+        return memberMissionRepository.save(existingMemberMission);
+
     }
 }

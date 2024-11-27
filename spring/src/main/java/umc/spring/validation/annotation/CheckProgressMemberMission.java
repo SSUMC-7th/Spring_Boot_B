@@ -8,9 +8,9 @@ import java.lang.annotation.*;
 
 @Documented
 @Constraint(validatedBy = MemberMissionProgressedValidator.class)
-@Target({ElementType.TYPE})
+@Target({ElementType.METHOD, ElementType.FIELD, ElementType.PARAMETER})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface ProgressMemberMission {
+public @interface CheckProgressMemberMission {
 
     String message() default "해당 미션은 이미 진행중입니다.";
     Class<?>[] groups() default {};

@@ -1,21 +1,12 @@
 package umc.spring.apiPayload.exception.handler;
 
 import lombok.Getter;
-import org.springframework.http.HttpStatus;
 import umc.spring.apiPayload.code.BaseErrorCode;
-import umc.spring.apiPayload.code.status.ErrorStatus;
+import umc.spring.apiPayload.exception.GeneralException;
 
 @Getter
-public class StoreHandler extends RuntimeException {
-    private final ErrorStatus errorStatus;
+public class StoreHandler extends GeneralException {
 
-    public StoreHandler(ErrorStatus errorStatus) {
-        super(errorStatus.getMessage());
-        this.errorStatus = errorStatus;
-    }
-
-    public HttpStatus getHttpStatus() {
-        return this.errorStatus.getHttpStatus();
-    }
+    public StoreHandler(BaseErrorCode code) {super(code);}
 }
 

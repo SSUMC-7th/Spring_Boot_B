@@ -14,6 +14,7 @@ import umc.spring.domain.mapping.MemberMission;
 import umc.spring.domain.mapping.QMemberMission;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
@@ -51,13 +52,15 @@ public class MemberMissionRepositoryImpl implements MemberMissionRepositoryCusto
     }
 
     @Override
-    public MemberMission findByMemberAndMission(Member member, Mission mission) {
+    public Optional<MemberMission> findByMemberAndMission(Long memberId, Long missionId) {
         QMemberMission memberMission = QMemberMission.memberMission;
 
-        return jpaQueryFactory
+        return Optional.ofNullable(jpaQueryFactory
                 .selectFrom(memberMission)
-                .where(memberMission.member.eq(member)
-                        .and(memberMission.mission.eq(mission)))
-                .fetchOne();
+                .where(
+                        memberMission.member.id.eq(memberId)
+                                .and(memberMission.mission.id.eq(missionId))
+                )
+                .fetchOne());
     }
 }
