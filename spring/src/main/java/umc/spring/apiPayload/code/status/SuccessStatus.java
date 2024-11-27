@@ -13,6 +13,7 @@ public enum SuccessStatus implements BaseCode {
     // 멤버 관련 응답
     // 리뷰 관련 응답
     REVIEW_CREATE_OK(HttpStatus.OK, "REVIEW201", "리뷰 등록 성공"),
+    REVIEW_GET_OK(HttpStatus.OK, "REVIEW202", "리뷰 가져오기 성공"),
 
     // 레스토랑  관련 응답
     RESTAURANT_CREATE_OK(HttpStatus.OK, "RESTAURANT201", "레스토랑 등록 성공"),
