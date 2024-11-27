@@ -12,6 +12,6 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface CheckMemberMissionNotInProgress {
 
-    String message() default "해당 미션은 이미 진행중입니다.";
+    String message() default "해당 미션은 진행중이지 않습니다.";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};}

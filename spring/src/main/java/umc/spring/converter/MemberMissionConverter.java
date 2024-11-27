@@ -16,8 +16,17 @@ public class MemberMissionConverter {
                 .build();
     }
 
-    public static MemberMissionResponseDTO.CreateMemberMissionDto toCreateResultDto(MemberMission memberMission) {
-        return MemberMissionResponseDTO.CreateMemberMissionDto.builder()
+    public static MemberMissionResponseDTO.CreateMemberMissionResultDto toCreateResultDto(MemberMission memberMission) {
+        return MemberMissionResponseDTO.CreateMemberMissionResultDto.builder()
+                .memberMissionId(memberMission.getId())
+                .memberId(memberMission.getMember().getId())
+                .missionId(memberMission.getMission().getId())
+                .status(memberMission.getStatus().name())
+                .build();
+    }
+
+    public static MemberMissionResponseDTO.UpdateMissionCompleteResultDTO toUpdateCompleteResultDTO(MemberMission memberMission) {
+        return MemberMissionResponseDTO.UpdateMissionCompleteResultDTO.builder()
                 .memberMissionId(memberMission.getId())
                 .memberId(memberMission.getMember().getId())
                 .missionId(memberMission.getMission().getId())

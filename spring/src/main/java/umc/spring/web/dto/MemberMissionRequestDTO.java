@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import umc.spring.validation.annotation.CheckProgressMemberMission;
 
 public class MemberMissionRequestDTO {
 
@@ -14,6 +13,18 @@ public class MemberMissionRequestDTO {
     @NoArgsConstructor
     @AllArgsConstructor
     public static class CreateMemberMissionDto {
+        @NotNull
+        private Long memberId;
+
+        @NotNull
+        private Long missionId;
+    }
+
+    @Getter
+    @Builder
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class UpdateMemberMissionCompleteDTO {
         @NotNull
         private Long memberId;
 
