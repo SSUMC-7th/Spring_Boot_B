@@ -29,14 +29,6 @@ public class ReviewController {
         return ApiResponse.of(SuccessStatus.REVIEW_CREATE_OK, response);
     }
 
-    @Operation(summary = "특정 가게의 리뷰 가져오기", description = "레스토랑 아이디로 리뷰 가져오는 api입니다.")
-    @GetMapping("/restaurants/{restaurantId}")
-    public ApiResponse<ReviewResponseDTO.ReviewPreViewListDTO> getReviewListByRestaurantId(@RestaurantExists @PathVariable(name = "restaurantId") Long restaurantId,
-                                                                                           @CheckPage @RequestParam(name = "page") Integer page) {
-        ReviewResponseDTO.ReviewPreViewListDTO response = ReviewConverter.reviewPreViewListDTO(reviewService.getReviewListByRestaurantId(restaurantId, page));
-        return ApiResponse.of(SuccessStatus.REVIEW_GET_OK, response);
-    }
-
     @Operation(summary = "특정 사용자의 리뷰 가져오기", description = "memberId로 리뷰 가져오는 api입니다.")
     @GetMapping("/members/{memberId}")
     public ApiResponse<ReviewResponseDTO.ReviewPreViewListDTO> getReviewListByMemberId(@RestaurantExists @PathVariable(name = "memberId") Long memberId,
