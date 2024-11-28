@@ -36,9 +36,7 @@ public class ReviewServiceImpl implements ReviewService{
 
     @Override
     public Page<Review> getReviewListByRestaurantId(Long restaurantId, Integer page) {
-        Restaurant restaurant = restaurantRepository.findById(restaurantId)
-                .orElseThrow(new GeneralException(ErrorStatus._BAD_REQUEST)
-        );
+        Restaurant restaurant = restaurantRepository.findById(restaurantId).orElseThrow();
 
         return reviewRepository.findAllByRestaurant(restaurant, PageRequest.of(page, 10));
     }
