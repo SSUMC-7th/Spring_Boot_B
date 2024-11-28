@@ -40,7 +40,7 @@ public class MemberMissionController {
     }
 
     @Operation(summary = "진행 중인 미션을 진행 완료로 변경", description = "진행 중인 미션을 진행 완료로 변경하는 api입니다.")
-    @PostMapping("/comlete")
+    @PostMapping("/complete")
     public ApiResponse<MemberMissionResponseDTO.MemberMissionIdDTO> changeToCompleteMission(@Valid @RequestBody MemberMissionRequestDTO.AddMemberMissionDTO request) {
         MemberMission memberMission = memberMissionService.changeToCompleteMission(request);
         MemberMissionResponseDTO.MemberMissionIdDTO response = MemberMissionConverter.toMemberMissionIdDTO(memberMission);
