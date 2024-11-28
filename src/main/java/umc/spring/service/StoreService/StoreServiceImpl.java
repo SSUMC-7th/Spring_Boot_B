@@ -2,13 +2,17 @@ package umc.spring.service.StoreService;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import umc.spring.apiPayload.code.status.ErrorStatus;
 import umc.spring.apiPayload.exception.handler.RegionHandler;
 import umc.spring.converter.StoreConverter;
+import umc.spring.domain.Mission;
 import umc.spring.domain.Region;
 import umc.spring.domain.Store;
 
+import umc.spring.repository.MissionRepository.MissionRepository;
 import umc.spring.repository.RegionRepository.RegionRepository;
 import umc.spring.repository.StoreRepository.StoreRepository;
 import umc.spring.web.dto.StoreDTO.StoreRequestDTO;
@@ -20,7 +24,7 @@ public class StoreServiceImpl implements StoreService {
 
     private final StoreRepository storeRepository;
     private final RegionRepository regionRepository;
-
+    private final MissionRepository missionRepository;
     @Override
     @Transactional
     public Store joinStore(StoreRequestDTO.JoinDTO request) {
@@ -30,6 +34,15 @@ public class StoreServiceImpl implements StoreService {
        Store newStore = StoreConverter.toStore(request, region);
        return storeRepository.save(newStore);
     }
+
+    @Override
+    public Page<Mission> getMissionList(Long storeId, Integer page) {
+        Store store = storeRepository.findById(storeId).get();
+
+        Page<Mission> storePage = missionRepository.findAllByStore(store, PageRequest.of(page, 10));
+        return storePage;
+    }
+
 
     public boolean doesStoreExist(Long storeId) {
         return storeRepository.existsById(storeId);
