@@ -4,6 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import umc.spring.apiPayload.code.status.ErrorStatus;
+import umc.spring.apiPayload.exception.GeneralException;
 import umc.spring.converter.ReviewConverter;
 import umc.spring.domain.Member;
 import umc.spring.domain.Restaurant;
@@ -33,9 +35,18 @@ public class ReviewServiceImpl implements ReviewService{
     }
 
     @Override
-    public Page<Review> getReviewList(Long restaurantId, Integer page) {
-        Restaurant restaurant = restaurantRepository.findById(restaurantId).orElseThrow();
+    public Page<Review> getReviewListByRestaurantId(Long restaurantId, Integer page) {
+        Restaurant restaurant = restaurantRepository.findById(restaurantId)
+                .orElseThrow(new GeneralException(ErrorStatus._BAD_REQUEST)
+        );
 
         return reviewRepository.findAllByRestaurant(restaurant, PageRequest.of(page, 10));
+    }
+
+    @Override
+    public Page<Review> getReviewListByMemberId(Long memberId, Integer page){
+        Member member = memberRepository.findById(memberId).orElseThrow();
+
+        return reviewRepository.findAllByMember(member, PageRequest.of(page, 10));
     }
 }
