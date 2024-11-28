@@ -15,6 +15,7 @@ import umc.spring.dto.memberMissionDTO.MemberMissionResponseDTO;
 import umc.spring.dto.missionDTO.MissionResponseDTO;
 import umc.spring.handler.annotation.CheckPage;
 import umc.spring.handler.annotation.RestaurantExists;
+import umc.spring.handler.resolver.CheckPageValidator;
 import umc.spring.service.memberMissionService.MemberMissionService;
 
 @RestController
@@ -34,7 +35,7 @@ public class MemberMissionController {
     @GetMapping("/{memberId}/missions")
     public ApiResponse<MemberMissionResponseDTO.MemberMissionListDTO> getMissionListByRestaurantId(@PathVariable(name = "memberId") Long memberId,
                                                                                                  @CheckPage @RequestParam(name = "page") Integer page) {
-        MemberMissionResponseDTO.MemberMissionListDTO response = MemberMissionConverter.memberMissionListDTO(memberMissionService.getMissionListByMemberId(memberId, page, MissionStatus.CHALLENGING));
+        MemberMissionResponseDTO.MemberMissionListDTO response = MemberMissionConverter.memberMissionListDTO(memberMissionService.getMissionListByMemberId(memberId, CheckPageValidator.adjustPage(page), MissionStatus.CHALLENGING));
         return ApiResponse.of(SuccessStatus.MISSION_GET_OK, response);
     }
 

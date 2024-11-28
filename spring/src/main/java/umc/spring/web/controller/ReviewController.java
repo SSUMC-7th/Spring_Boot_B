@@ -12,6 +12,7 @@ import umc.spring.dto.reviewDTO.ReviewRequestDTO;
 import umc.spring.dto.reviewDTO.ReviewResponseDTO;
 import umc.spring.handler.annotation.CheckPage;
 import umc.spring.handler.annotation.RestaurantExists;
+import umc.spring.handler.resolver.CheckPageValidator;
 import umc.spring.service.reviewService.ReviewService;
 
 
@@ -33,7 +34,7 @@ public class ReviewController {
     @GetMapping("/members/{memberId}")
     public ApiResponse<ReviewResponseDTO.ReviewPreViewListDTO> getReviewListByMemberId(@RestaurantExists @PathVariable(name = "memberId") Long memberId,
                                                                                        @CheckPage @RequestParam(name = "page") Integer page) {
-        ReviewResponseDTO.ReviewPreViewListDTO response = ReviewConverter.reviewPreViewListDTO(reviewService.getReviewListByMemberId(memberId, page));
+        ReviewResponseDTO.ReviewPreViewListDTO response = ReviewConverter.reviewPreViewListDTO(reviewService.getReviewListByMemberId(memberId, CheckPageValidator.adjustPage(page)));
         return ApiResponse.of(SuccessStatus.REVIEW_GET_OK, response);
     }
 }

@@ -1,10 +1,17 @@
 package umc.spring.handler.annotation;
 
+import jakarta.validation.Constraint;
+import jakarta.validation.Payload;
+import umc.spring.handler.resolver.CheckPageValidator;
+
 import java.lang.annotation.*;
 
 @Documented
-@Target({ElementType.FIELD, ElementType.PARAMETER})
+@Constraint(validatedBy = CheckPageValidator.class)
+@Target({ElementType.METHOD, ElementType.FIELD, ElementType.PARAMETER})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface CheckPage {
-    String message() default "페이지 값이 잘못되었습니다. 1 이상이어야 합니다.";
+    String message() default "페이지 번호는 1 이상이어야 합니다.";
+    Class<?>[] groups() default {};
+    Class<? extends Payload>[] payload() default {};
 }
