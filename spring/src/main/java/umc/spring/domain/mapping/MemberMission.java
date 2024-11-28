@@ -2,6 +2,8 @@ package umc.spring.domain.mapping;
 
 import jakarta.persistence.*;
 import lombok.*;
+import umc.spring.apiPayload.code.status.ErrorStatus;
+import umc.spring.apiPayload.exception.GeneralException;
 import umc.spring.domain.Member;
 import umc.spring.domain.Mission;
 import umc.spring.domain.common.BaseEntity;
@@ -32,7 +34,7 @@ public class MemberMission extends BaseEntity {
 
     public void completeMission() {
         if (this.status != MissionStatus.CHALLENGING) {
-            throw new IllegalStateException("현재 상태에서 완료로 변경할 수 없습니다.");
+            throw new GeneralException(ErrorStatus.MEMBER_MISSION_ERROR);
         }
         this.status = MissionStatus.COMPLETE;
     }

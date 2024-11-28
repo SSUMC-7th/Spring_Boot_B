@@ -23,7 +23,8 @@ public enum ErrorStatus implements BaseErrorCode {
 
     // Mission Error
     MISSION_NOT_FOUND(HttpStatus.BAD_REQUEST, "MISSION4001", "해당하는 미션이 없습니다."),
-    MEMBER_MISSION_NOT_FOUND(HttpStatus.BAD_REQUEST, "MISSION4001", "해당하는 진행 중인 미션이 없습니다."),
+    MEMBER_MISSION_NOT_FOUND(HttpStatus.BAD_REQUEST, "MISSION4002", "해당하는 진행 중인 미션이 없습니다."),
+    MEMBER_MISSION_ERROR(HttpStatus.BAD_REQUEST, "MISSION4003", "현재 상태에서 완료로 변경할 수 없습니다."),
 
     //Region Error
     REGION_NOT_FOUND(HttpStatus.BAD_REQUEST, "REGION4001", "해당하는 지역이 없습니다."),
