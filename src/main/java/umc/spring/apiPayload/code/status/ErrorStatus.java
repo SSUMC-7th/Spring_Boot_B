@@ -39,6 +39,9 @@ public enum ErrorStatus implements BaseErrorCode {
 
     // MemberMission Error
     MEMBER_MISSION_ALREADY_CHALLENGED(HttpStatus.CONFLICT, "MEMBERMISSION4009", "해당 미션을 이미 도전 중입니다."),
+
+    // Page Error
+    PAGE_NUMBER_BELOW_ZERO(HttpStatus.BAD_REQUEST, "PAGE4001", "페이지 번호가 0 이하 입니다.")
     ;
 
 

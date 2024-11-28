@@ -1,6 +1,8 @@
 package umc.spring.service.MemberMissionService;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.Errors;
 import umc.spring.apiPayload.code.status.ErrorStatus;
@@ -39,5 +41,13 @@ public class MemberMissionServiceImpl implements MemberMissionService{
         return memberMissionRepository.findStatusByMissionId(missionId)
                 .map(status -> !status.equals(MissionStatus.CHALLENGING))
                 .orElse(true);
+    }
+
+    @Override
+    public Page<Mission> getCompleteMissions(Long memberId, Integer page) {
+        Member member = memberRepository.findById(memberId).get();
+
+        Page<Mission> missionPage = memberMissionRepository.findCompleteMissionsByMemberId(memberId, PageRequest.of(page, 10));
+        return missionPage;
     }
 }
