@@ -28,7 +28,7 @@ public class MemberMissionServiceImpl implements MemberMissionService{
     @Override
     public MemberMission addMemberMission(MemberMissionRequestDTO.AddMemberMissionDTO request){
         Member member = memberRepository.findById(request.getMemberId())
-                .orElseThrow();
+                .orElseThrow(() -> new GeneralException(ErrorStatus.MEMBER_NOT_FOUND));
         Mission mission = missionRepository.findById(request.getMissionId())
                 .orElseThrow();
         MemberMission newMemberMission = MemberMissionConverter.toMemberMission(member, mission, MissionStatus.CHALLENGING);
@@ -39,7 +39,7 @@ public class MemberMissionServiceImpl implements MemberMissionService{
     @Override
     public Page<MemberMission> getMissionListByMemberId(Long memberId, Integer page, MissionStatus status){
         Member member = memberRepository.findById(memberId)
-                .orElseThrow();
+                .orElseThrow(() -> new GeneralException(ErrorStatus.MEMBER_NOT_FOUND));
 
         return memberMissionRepository.findAllByMemberAndStatus(member, status, PageRequest.of(page, 10));
     }
