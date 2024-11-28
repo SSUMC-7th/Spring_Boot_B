@@ -9,4 +9,5 @@ import umc.spring.dto.memberMissionDTO.MemberMissionRequestDTO;
 public interface MemberMissionService {
     MemberMission addMemberMission(MemberMissionRequestDTO.AddMemberMissionDTO request);
     Page<MemberMission> getMissionListByMemberId(Long memberId, Integer page, MissionStatus status);
+    MemberMission changeToCompleteMission(MemberMissionRequestDTO.AddMemberMissionDTO request);
 }

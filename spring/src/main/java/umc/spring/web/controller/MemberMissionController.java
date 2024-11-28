@@ -22,7 +22,7 @@ import umc.spring.service.memberMissionService.MemberMissionService;
 @RequiredArgsConstructor
 public class MemberMissionController {
     private final MemberMissionService memberMissionService;
-    @Operation(summary = "챌린지 중인 미션으로 등록", description = "챌린지 중인 미션으로 등록하기 api입니다.")
+    @Operation(summary = "진행 중인 미션으로 등록", description = "진행 중인 미션으로 등록하기 api입니다.")
     @PostMapping("/challenge")
     public ApiResponse<MemberMissionResponseDTO.MemberMissionIdDTO> addMemberMission(@Valid @RequestBody MemberMissionRequestDTO.AddMemberMissionDTO request) {
         MemberMission memberMission = memberMissionService.addMemberMission(request);
@@ -36,5 +36,13 @@ public class MemberMissionController {
                                                                                                  @CheckPage @RequestParam(name = "page") Integer page) {
         MemberMissionResponseDTO.MemberMissionListDTO response = MemberMissionConverter.memberMissionListDTO(memberMissionService.getMissionListByMemberId(memberId, page, MissionStatus.CHALLENGING));
         return ApiResponse.of(SuccessStatus.MISSION_GET_OK, response);
+    }
+
+    @Operation(summary = "진행 중인 미션을 진행 완료로 변경", description = "진행 중인 미션을 진행 완료로 변경하는 api입니다.")
+    @PostMapping("/comlete")
+    public ApiResponse<MemberMissionResponseDTO.MemberMissionIdDTO> changeToCompleteMission(@Valid @RequestBody MemberMissionRequestDTO.AddMemberMissionDTO request) {
+        MemberMission memberMission = memberMissionService.changeToCompleteMission(request);
+        MemberMissionResponseDTO.MemberMissionIdDTO response = MemberMissionConverter.toMemberMissionIdDTO(memberMission);
+        return ApiResponse.of(SuccessStatus.MEMBER_MISSION_COMPLETE_OK, response);
     }
 }
