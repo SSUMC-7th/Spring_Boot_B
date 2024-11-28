@@ -29,4 +29,11 @@ public class MemberMission extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "mission_id")
     private Mission mission;
+
+    public void completeMission() {
+        if (this.status != MissionStatus.CHALLENGING) {
+            throw new IllegalStateException("현재 상태에서 완료로 변경할 수 없습니다.");
+        }
+        this.status = MissionStatus.COMPLETE;
+    }
 }
