@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.*;
 import umc.spring.apiPayload.ApiResponse;
 import umc.spring.apiPayload.code.status.SuccessStatus;
 import umc.spring.converter.MemberMissionConverter;
-import umc.spring.converter.MissionConverter;
 import umc.spring.domain.enums.MissionStatus;
 import umc.spring.domain.mapping.MemberMission;
 import umc.spring.dto.memberMissionDTO.MemberMissionRequestDTO;

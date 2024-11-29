@@ -9,7 +9,6 @@ import umc.spring.apiPayload.exception.GeneralException;
 import umc.spring.converter.MemberMissionConverter;
 import umc.spring.domain.Member;
 import umc.spring.domain.Mission;
-import umc.spring.domain.Restaurant;
 import umc.spring.domain.enums.MissionStatus;
 import umc.spring.domain.mapping.MemberMission;
 import umc.spring.dto.memberMissionDTO.MemberMissionRequestDTO;
