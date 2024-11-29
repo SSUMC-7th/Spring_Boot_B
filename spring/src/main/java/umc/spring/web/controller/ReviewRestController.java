@@ -48,7 +48,7 @@ public class ReviewRestController {
             @Parameter(name = "storeId", description = "가게의 아이디, path variable 입니다!"),
             @Parameter(name = "page", description = "페이지 번호, query string 입니다!")
     })
-    public ApiResponse<ReviewResponseDTO.ReviewPreViewListDTO> getReviewList(@ExistStore @PathVariable(name = "storeId") Long storeId, @CheckPage @RequestParam(name = "page") Integer page){
+    public ApiResponse<ReviewResponseDTO.ReviewPreViewListDTO> getReviewList(@PathVariable(name = "storeId") Long storeId, @CheckPage @RequestParam(name = "page") Integer page){
         int actualPage = page - 1;
         Page<Review> reviewList = reviewQueryService.getStoreReviewList(storeId, actualPage);
         return ApiResponse.onSuccess(ReviewConverter.reviewPreViewListDTO(reviewList));
