@@ -2,11 +2,11 @@ package umc.spring.validation.annotation;
 
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
-import umc.spring.validation.validator.StoresValidator;
+import umc.spring.validation.validator.StoresExistValidator;
 import java.lang.annotation.*;
 
 @Documented
-@Constraint(validatedBy = StoresValidator.class)
+@Constraint(validatedBy = StoresExistValidator.class)
 @Target({ElementType.METHOD, ElementType.FIELD, ElementType.PARAMETER})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ExistStores {

@@ -1,5 +1,7 @@
 package umc.spring.service.ReviewService;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import umc.spring.domain.Member;
@@ -42,5 +44,16 @@ public class ReviewQueryServiceImpl implements ReviewQueryService {
                 .build();
 
         return reviewRepository.save(review);
+    }
+
+    @Override
+    public Page<Review> getReviewList(Long StoreId, Integer page) {
+
+        Store store = storeRepository.findById(StoreId)
+                .orElseThrow(() -> new IllegalArgumentException("해당 가게가 존재하지 않습니다; StoreId: " + StoreId));
+
+
+        Page<Review> ReviewPage = reviewRepository.findAllByStore(store, PageRequest.of(page, 10));
+        return ReviewPage;
     }
 }
