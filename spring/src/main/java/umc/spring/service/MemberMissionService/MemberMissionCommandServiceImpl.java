@@ -25,7 +25,7 @@ public class MemberMissionCommandServiceImpl implements MemberMissionCommandServ
     private final MemberRepository memberRepository;
 
     @Transactional
-    public MemberMission makeMemberMissionInProgress(MemberMissionRequestDTO.CreateMemberMissionDto request) {
+    public MemberMission createMemberMissionInProgress(MemberMissionRequestDTO.CreateMemberMissionDto request) {
         Member member = memberRepository.findById(request.getMemberId())
                 .orElseThrow(() -> new MemberHandler(ErrorStatus.MEMBER_NOT_FOUND));
         Mission mission = missionRepository.findById(request.getMissionId())
@@ -33,12 +33,36 @@ public class MemberMissionCommandServiceImpl implements MemberMissionCommandServ
 
         // 동일한 멤버와 미션으로 매핑된 MemberMission 엔티티가 있는지 확인
         MemberMission existingMemberMission = memberMissionRepository.findByMemberAndMission(member.getId(), mission.getId())
-                        .orElseThrow(() -> new MemberMissionHandler(ErrorStatus.MEMBER_MISSION_NOT_FOUND));
+                .orElseGet(() -> {
+                    // 없으면 새로 생성
+                    MemberMission newMemberMission = MemberMission.builder()
+                            .member(member)
+                            .mission(mission)
+                            .status(MissionStatus.IN_PROGRESS) // 상태를 COMPLETED로 설정
+                            .build();
+                    return newMemberMission;
+                });
 
         // 이미 존재하는 경우 상태를 IN_PROGRESS로 변경
         existingMemberMission.setStatus(MissionStatus.IN_PROGRESS);
 
         return memberMissionRepository.save(existingMemberMission);
+    }
 
+    @Transactional
+    public MemberMission updateMemberMissionComplete(MemberMissionRequestDTO.UpdateMemberMissionCompleteDTO request) {
+        Member member = memberRepository.findById(request.getMemberId())
+                .orElseThrow(() -> new MemberHandler(ErrorStatus.MEMBER_NOT_FOUND));
+        Mission mission = missionRepository.findById(request.getMissionId())
+                .orElseThrow(() -> new MissionHandler(ErrorStatus.MISSION_NOT_FOUND));
+
+        // 동일한 멤버와 미션으로 매핑된 MemberMission 엔티티가 있는지 확인
+        MemberMission existingMemberMission = memberMissionRepository.findByMemberAndMission(member.getId(), mission.getId())
+                .orElseThrow(() -> new MemberMissionHandler(ErrorStatus.MEMBER_MISSION_NOT_FOUND));
+
+        // 이미 존재하는 경우 상태를 COMPLETED로 변경
+        existingMemberMission.setStatus(MissionStatus.COMPLETED);
+
+        return memberMissionRepository.save(existingMemberMission);
     }
 }

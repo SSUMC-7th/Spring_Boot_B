@@ -40,6 +40,7 @@ public enum ErrorStatus implements BaseErrorCode {
     //for member mission
     MEMBER_MISSION_NOT_FOUND(HttpStatus.BAD_REQUEST, "MEMBER_MISSION4001", "멤버미션 매핑 테이블이 없습니다"),
     MISSION_ALREADY_IN_PROGRESS(HttpStatus.BAD_REQUEST, "MEMBER_MISSION4003", "이미 진행중인 미션입니다."),
+    MISSION_NOT_IN_PROGRESS(HttpStatus.BAD_REQUEST, "MEMBER_MISSION4004", "진행중이지 않은 미션입니다."),
 
     //for page
     PAGE_EXCEPTION(HttpStatus.BAD_REQUEST, "PAGE4022", "페이지 값이 유효하지 않습니다.");

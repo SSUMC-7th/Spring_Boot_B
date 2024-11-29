@@ -4,5 +4,6 @@ import umc.spring.domain.mapping.MemberMission;
 import umc.spring.web.dto.MemberMissionRequestDTO;
 
 public interface MemberMissionCommandService {
-    MemberMission makeMemberMissionInProgress(MemberMissionRequestDTO.CreateMemberMissionDto request);
+    MemberMission createMemberMissionInProgress(MemberMissionRequestDTO.CreateMemberMissionDto request);
+    MemberMission updateMemberMissionComplete(MemberMissionRequestDTO.UpdateMemberMissionCompleteDTO request);
 }
