@@ -44,6 +44,14 @@ public class MemberMissionServiceImpl implements MemberMissionService{
     }
 
     @Override
+    public Page<Mission> getChallengingMissions(Long memberId, Integer page) {
+        Member member = memberRepository.findById(memberId).get();
+
+        Page<Mission> missionPage = memberMissionRepository.findChallengingMissionsByMemberId(memberId, PageRequest.of(page, 10));
+        return missionPage;
+    }
+
+    @Override
     public Page<Mission> getCompleteMissions(Long memberId, Integer page) {
         Member member = memberRepository.findById(memberId).get();
 
