@@ -21,7 +21,7 @@ import umc.spring.service.reviewService.ReviewService;
 @RequiredArgsConstructor
 public class ReviewController {
     private final ReviewService reviewService;
-
+/*
     @Operation(summary = "리뷰 등록", description = "레스토랑 아이디로 리뷰 등록 api입니다.")
     @PostMapping("/add")
     public ApiResponse<ReviewResponseDTO.ReviewIdDTO> addReview(@Valid @RequestBody ReviewRequestDTO.AddReviewDTO request) {
@@ -29,4 +29,14 @@ public class ReviewController {
         ReviewResponseDTO.ReviewIdDTO response = ReviewConverter.toReviewIdDTO(review);
         return ApiResponse.of(SuccessStatus.REVIEW_CREATE_OK, response);
     }
+
+    @Operation(summary = "리뷰 가져오기", description = "레스토랑 아이디로 리뷰 가져오는 api입니다.")
+    @PostMapping("/{restaurantId}")
+    public ApiResponse<ReviewResponseDTO.ReviewIdDTO> addReview(@Valid @RequestBody ReviewRequestDTO.AddReviewDTO request) {
+        Review review = reviewService.addReview(request);
+        ReviewResponseDTO.ReviewIdDTO response = ReviewConverter.toReviewIdDTO(review);
+        return ApiResponse.of(SuccessStatus.REVIEW_CREATE_OK, response);
+    }
+
+ */
 }

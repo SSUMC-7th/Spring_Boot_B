@@ -13,10 +13,6 @@ public class ReviewRequestDTO {
 
         private Long memberId;
 
-        @NotNull(message = "가게 ID는 필수 입력값입니다.")
-        @RestaurantExists
-        private Long restaurantId;
-
         private String title;
         @NotNull(message = "리뷰 내용은 필수 입력값입니다.")
         private String content;
