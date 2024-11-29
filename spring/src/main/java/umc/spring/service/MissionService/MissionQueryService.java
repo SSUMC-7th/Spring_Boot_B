@@ -8,4 +8,5 @@ import java.util.List;
 public interface MissionQueryService {
     List<Mission> getAvailableMissions(String regionName, Long cursor, Long memberId);
     Page<Mission> getMissionsByStore(Long storeId, Integer page);
+    Page<Mission> getInProgressMissionsByMember(Long memberId, Integer page);
 }

@@ -22,7 +22,7 @@ public class MemberMissionRepositoryImpl implements MemberMissionRepositoryCusto
     private final JPAQueryFactory jpaQueryFactory;
 
     @Override
-    public Page<MemberMission> findMissionsByMemberAndStatus(Long memberId, String status, Long cursor, Pageable pageable) {
+    public Page<MemberMission> findMemberMissionsByMemberAndStatus(Long memberId, String status, Long cursor, Pageable pageable) {
         QMember member = QMember.member;
         QMemberMission memberMission = QMemberMission.memberMission;
         QMission mission = QMission.mission;
