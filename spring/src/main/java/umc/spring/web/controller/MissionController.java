@@ -3,6 +3,7 @@ package umc.spring.web.controller;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import umc.spring.apiPayload.ApiResponse;
 import umc.spring.apiPayload.code.status.SuccessStatus;
@@ -16,6 +17,7 @@ import umc.spring.handler.annotation.CheckPage;
 import umc.spring.handler.annotation.RestaurantExists;
 import umc.spring.service.missionService.MissionService;
 
+@Validated
 @RestController
 @RequestMapping("/missions")
 @RequiredArgsConstructor
