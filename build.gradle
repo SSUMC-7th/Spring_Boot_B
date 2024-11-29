@@ -54,6 +54,10 @@ dependencies {
 	implementation 'org.springdoc:springdoc-openapi-ui:1.6.9'
 	implementation 'org.springdoc:springdoc-openapi-data-rest:1.6.9'
 
+	// Spring Security
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	testImplementation 'org.springframework.security:spring-security-test'
+
 	// Testing
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
