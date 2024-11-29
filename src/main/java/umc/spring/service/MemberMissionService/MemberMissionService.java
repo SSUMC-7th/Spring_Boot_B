@@ -5,4 +5,5 @@ import umc.spring.domain.Mission;
 
 public interface MemberMissionService {
     Page<Mission> getChallengingMissions(Long memberId, Integer page);
+    Page<Mission> getCompleteMissions(Long memberId, Integer page);
 }

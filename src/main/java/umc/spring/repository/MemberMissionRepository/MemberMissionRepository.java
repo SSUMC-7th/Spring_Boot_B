@@ -17,4 +17,6 @@ public interface MemberMissionRepository extends JpaRepository<MemberMission, Lo
 
     @Query("SELECT m FROM MemberMission mm JOIN mm.mission m WHERE mm.member.id = :memberId AND mm.status = 'CHALLENGING'")
     Page<Mission> findChallengingMissionsByMemberId(@Param("memberId") Long memberId, PageRequest pageRequest);
+    @Query("SELECT m FROM MemberMission mm JOIN mm.mission m WHERE mm.member.id = :memberId AND mm.status = 'COMPLETE'")
+    Page<Mission> findCompleteMissionsByMemberId(@Param("memberId") Long memberId, PageRequest pageRequest);
 }
