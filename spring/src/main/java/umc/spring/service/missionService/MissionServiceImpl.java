@@ -4,6 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import umc.spring.apiPayload.code.status.ErrorStatus;
+import umc.spring.apiPayload.exception.GeneralException;
 import umc.spring.converter.MissionConverter;
 import umc.spring.converter.ReviewConverter;
 import umc.spring.domain.Member;
@@ -26,7 +28,7 @@ public class MissionServiceImpl implements MissionService{
     @Override
     public Mission addMission(MissionRequestDTO.AddMissionDTO request){
         Restaurant restaurant = restaurantRepository.findById(request.getRestaurantId())
-                .orElseThrow();
+                .orElseThrow(() -> new GeneralException(ErrorStatus.RESTAURANT_NOT_FOUND));
         Mission newMission = MissionConverter.toMission(request, restaurant);
         missionRepository.save(newMission);
         return newMission;
@@ -34,7 +36,8 @@ public class MissionServiceImpl implements MissionService{
 
     @Override
     public Page<Mission> getMissionListByRestaurantId(Long restaurantId, Integer page){
-        Restaurant restaurant = restaurantRepository.findById(restaurantId).orElseThrow();
+        Restaurant restaurant = restaurantRepository.findById(restaurantId)
+                .orElseThrow(() -> new GeneralException(ErrorStatus.RESTAURANT_NOT_FOUND));
 
         return missionRepository.findAllByRestaurant(restaurant, PageRequest.of(page, 10));
     }

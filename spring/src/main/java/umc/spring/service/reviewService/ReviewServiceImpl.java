@@ -26,9 +26,9 @@ public class ReviewServiceImpl implements ReviewService{
     @Override
     public Review addReview(ReviewRequestDTO.AddReviewDTO request, Long restaurantId){
         Restaurant restaurant = restaurantRepository.findById(restaurantId)
-                .orElseThrow();
+                .orElseThrow(() -> new GeneralException(ErrorStatus.RESTAURANT_NOT_FOUND));
         Member member = memberRepository.findById(request.getMemberId())
-                .orElseThrow();
+                .orElseThrow(() -> new GeneralException(ErrorStatus.MEMBER_NOT_FOUND));
         Review review = ReviewConverter.toReview(request, restaurant, member);
         reviewRepository.save(review);
         return review;
@@ -36,14 +36,16 @@ public class ReviewServiceImpl implements ReviewService{
 
     @Override
     public Page<Review> getReviewListByRestaurantId(Long restaurantId, Integer page) {
-        Restaurant restaurant = restaurantRepository.findById(restaurantId).orElseThrow();
+        Restaurant restaurant = restaurantRepository.findById(restaurantId)
+                .orElseThrow(() -> new GeneralException(ErrorStatus.RESTAURANT_NOT_FOUND));
 
         return reviewRepository.findAllByRestaurant(restaurant, PageRequest.of(page, 10));
     }
 
     @Override
     public Page<Review> getReviewListByMemberId(Long memberId, Integer page){
-        Member member = memberRepository.findById(memberId).orElseThrow();
+        Member member = memberRepository.findById(memberId)
+                .orElseThrow(() -> new GeneralException(ErrorStatus.MEMBER_NOT_FOUND));
 
         return reviewRepository.findAllByMember(member, PageRequest.of(page, 10));
     }

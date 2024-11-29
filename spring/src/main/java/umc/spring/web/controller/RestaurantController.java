@@ -3,6 +3,7 @@ package umc.spring.web.controller;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import umc.spring.apiPayload.ApiResponse;
 import umc.spring.apiPayload.code.status.SuccessStatus;
@@ -18,10 +19,12 @@ import umc.spring.dto.reviewDTO.ReviewRequestDTO;
 import umc.spring.dto.reviewDTO.ReviewResponseDTO;
 import umc.spring.handler.annotation.CheckPage;
 import umc.spring.handler.annotation.RestaurantExists;
+import umc.spring.handler.resolver.CheckPageValidator;
 import umc.spring.service.missionService.MissionService;
 import umc.spring.service.restaurantService.RestaurantService;
 import umc.spring.service.reviewService.ReviewService;
 
+@Validated
 @RestController
 @RequestMapping("/restaurants")
 @RequiredArgsConstructor
@@ -42,7 +45,7 @@ public class RestaurantController {
     @GetMapping("/{restaurantId}/missions")
     public ApiResponse<MissionResponseDTO.RestaurantMissionListDTO> getMissionListByRestaurantId(@RestaurantExists @PathVariable(name = "restaurantId") Long restaurantId,
                                                                                                  @CheckPage @RequestParam(name = "page") Integer page) {
-        MissionResponseDTO.RestaurantMissionListDTO response = MissionConverter.restaurantMissionListDTO(missionService.getMissionListByRestaurantId(restaurantId, page));
+        MissionResponseDTO.RestaurantMissionListDTO response = MissionConverter.restaurantMissionListDTO(missionService.getMissionListByRestaurantId(restaurantId, CheckPageValidator.adjustPage(page)));
         return ApiResponse.of(SuccessStatus.MISSION_GET_OK, response);
     }
 
@@ -50,7 +53,7 @@ public class RestaurantController {
     @GetMapping("/{restaurantId}/reviews")
     public ApiResponse<ReviewResponseDTO.ReviewPreViewListDTO> getReviewListByRestaurantId(@RestaurantExists @PathVariable(name = "restaurantId") Long restaurantId,
                                                                                            @CheckPage @RequestParam(name = "page") Integer page) {
-        ReviewResponseDTO.ReviewPreViewListDTO response = ReviewConverter.reviewPreViewListDTO(reviewService.getReviewListByRestaurantId(restaurantId, page));
+        ReviewResponseDTO.ReviewPreViewListDTO response = ReviewConverter.reviewPreViewListDTO(reviewService.getReviewListByRestaurantId(restaurantId, CheckPageValidator.adjustPage(page)));
         return ApiResponse.of(SuccessStatus.REVIEW_GET_OK, response);
     }
 }

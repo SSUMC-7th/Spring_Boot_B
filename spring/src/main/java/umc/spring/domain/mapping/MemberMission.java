@@ -2,6 +2,8 @@ package umc.spring.domain.mapping;
 
 import jakarta.persistence.*;
 import lombok.*;
+import umc.spring.apiPayload.code.status.ErrorStatus;
+import umc.spring.apiPayload.exception.GeneralException;
 import umc.spring.domain.Member;
 import umc.spring.domain.Mission;
 import umc.spring.domain.common.BaseEntity;
@@ -29,4 +31,11 @@ public class MemberMission extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "mission_id")
     private Mission mission;
+
+    public void completeMission() {
+        if (this.status != MissionStatus.CHALLENGING) {
+            throw new GeneralException(ErrorStatus.MEMBER_MISSION_ERROR);
+        }
+        this.status = MissionStatus.COMPLETE;
+    }
 }
