@@ -1,6 +1,8 @@
 package umc.spring.service.missionService;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import umc.spring.converter.MissionConverter;
 import umc.spring.converter.ReviewConverter;
@@ -28,5 +30,12 @@ public class MissionServiceImpl implements MissionService{
         Mission newMission = MissionConverter.toMission(request, restaurant);
         missionRepository.save(newMission);
         return newMission;
+    }
+
+    @Override
+    public Page<Mission> getMissionListByRestaurantId(Long restaurantId, Integer page){
+        Restaurant restaurant = restaurantRepository.findById(restaurantId).orElseThrow();
+
+        return missionRepository.findAllByRestaurant(restaurant, PageRequest.of(page, 10));
     }
 }
