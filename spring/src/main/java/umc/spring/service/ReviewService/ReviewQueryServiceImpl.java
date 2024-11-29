@@ -4,6 +4,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import umc.spring.apiPayload.code.status.ErrorStatus;
+import umc.spring.apiPayload.exception.handler.MemberHandler;
+import umc.spring.apiPayload.exception.handler.RegionHandler;
+import umc.spring.apiPayload.exception.handler.StoreHandler;
 import umc.spring.domain.Member;
 import umc.spring.domain.Review;
 import umc.spring.domain.Store;
@@ -31,9 +35,9 @@ public class ReviewQueryServiceImpl implements ReviewQueryService {
     public Review saveReview(Long memberId, Long storeId, String content, float rating) {
         // Member와 Store 엔티티 조회
         Member member = memberRepository.findById(memberId)
-                .orElseThrow(() -> new IllegalArgumentException("Member not found with ID: " + memberId));
+                .orElseThrow(() -> new MemberHandler(ErrorStatus.MEMBER_NOT_FOUND));
         Store store = storeRepository.findById(storeId)
-                .orElseThrow(() -> new IllegalArgumentException("Store not found with ID: " + storeId));
+                .orElseThrow(() -> new StoreHandler(ErrorStatus.STORE_NOT_FOUND));
 
         // Review 생성 및 저장
         Review review = Review.builder()
@@ -47,11 +51,10 @@ public class ReviewQueryServiceImpl implements ReviewQueryService {
     }
 
     @Override
-    public Page<Review> getReviewList(Long StoreId, Integer page) {
+    public Page<Review> getReviewList(Long storeId, Integer page) {
 
-        Store store = storeRepository.findById(StoreId)
-                .orElseThrow(() -> new IllegalArgumentException("해당 가게가 존재하지 않습니다; StoreId: " + StoreId));
-
+        Store store = storeRepository.findById(storeId)
+                .orElseThrow(() -> new StoreHandler(ErrorStatus.STORE_NOT_FOUND));
 
         Page<Review> ReviewPage = reviewRepository.findAllByStore(store, PageRequest.of(page, 10));
         return ReviewPage;

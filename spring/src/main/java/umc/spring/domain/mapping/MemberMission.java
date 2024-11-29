@@ -31,4 +31,6 @@ public class MemberMission {
     public void setStatus(MissionStatus status) {
         this.status = status;
     }
+
+    public MissionStatus getStatus() {return this.status;}
 }

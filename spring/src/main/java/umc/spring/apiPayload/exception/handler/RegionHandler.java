@@ -5,7 +5,5 @@ import umc.spring.apiPayload.exception.GeneralException;
 
 public class RegionHandler extends GeneralException {
 
-    public RegionHandler(BaseErrorCode errorCode) {
-        super(errorCode);
-    }
+    public RegionHandler(BaseErrorCode code) {super(code);}
 }

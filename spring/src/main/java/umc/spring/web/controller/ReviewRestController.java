@@ -9,16 +9,19 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import umc.spring.apiPayload.ApiResponse;
 import umc.spring.converter.ReviewConverter;
 import umc.spring.domain.Review;
 import umc.spring.service.ReviewService.ReviewCommandService;
 import umc.spring.service.ReviewService.ReviewQueryService;
-import umc.spring.validation.annotation.ExistStores;
+import umc.spring.validation.annotation.CheckPage;
+import umc.spring.validation.annotation.ExistStore;
 import umc.spring.web.dto.ReviewRequestDTO;
 import umc.spring.web.dto.ReviewResponseDTO;
 
+@Validated
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/reviews")
@@ -42,10 +45,12 @@ public class ReviewRestController {
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "AUTH006", description = "acess 토큰 모양이 이상함",content = @Content(schema = @Schema(implementation = ApiResponse.class))),
     })
     @Parameters({
-            @Parameter(name = "storeId", description = "가게의 아이디, path variable 입니다!")
+            @Parameter(name = "storeId", description = "가게의 아이디, path variable 입니다!"),
+            @Parameter(name = "page", description = "페이지 번호, query string 입니다!")
     })
-    public ApiResponse<ReviewResponseDTO.ReviewPreViewListDTO> getReviewList(@PathVariable(name = "storeId") Long storeId, @RequestParam(name = "page") Integer page){
-        Page<Review> reviewList = reviewQueryService.getReviewList(storeId, page);
+    public ApiResponse<ReviewResponseDTO.ReviewPreViewListDTO> getReviewList(@ExistStore @PathVariable(name = "storeId") Long storeId, @CheckPage @RequestParam(name = "page") Integer page){
+        int actualPage = page - 1;
+        Page<Review> reviewList = reviewQueryService.getReviewList(storeId, actualPage);
         return ApiResponse.onSuccess(ReviewConverter.reviewPreViewListDTO(reviewList));
     }
 }

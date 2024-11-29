@@ -1,6 +1,5 @@
 package umc.spring.web.dto;
 
-import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -9,7 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import umc.spring.validation.annotation.ExistStores;
+import umc.spring.validation.annotation.ExistStore;
 
 import java.time.LocalDate;
 
@@ -20,7 +19,7 @@ public class MissionRequestDTO {
     @NoArgsConstructor
     @AllArgsConstructor
     public static class CreateMissionDto {
-        @ExistStores
+        @ExistStore
         private Long storeId;
 
         @NotBlank

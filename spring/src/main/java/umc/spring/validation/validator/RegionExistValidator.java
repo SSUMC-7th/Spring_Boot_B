@@ -6,19 +6,18 @@ import jakarta.validation.ConstraintValidatorContext;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import umc.spring.apiPayload.code.status.ErrorStatus;
-import umc.spring.repository.StoreRepository.StoreRepository;
-import umc.spring.validation.annotation.ExistStores;
+import umc.spring.repository.RegionRepository.RegionRepository;
+import umc.spring.validation.annotation.ExistRegion;
 
 import java.util.List;
 
 @Component
 @RequiredArgsConstructor
-public class StoresExistValidator implements ConstraintValidator<ExistStores, Long> {
-
-    private final StoreRepository storeRepository;
+public class RegionExistValidator implements ConstraintValidator<ExistRegion, Long> {
+    private final RegionRepository regionRepository;
 
     @Override
-    public void initialize(ExistStores constraintAnnotation) {
+    public void initialize(ExistRegion constraintAnnotation) {
         ConstraintValidator.super.initialize(constraintAnnotation);
     }
 
@@ -28,10 +27,10 @@ public class StoresExistValidator implements ConstraintValidator<ExistStores, Lo
             return true; // null인 경우 유효성 검증을 통과하도록 설정 (필수 값 검증은 다른 어노테이션 사용)
         }
 
-        boolean exists = storeRepository.existsById(value);
+        boolean exists = regionRepository.existsById(value);
         if (!exists) {
             context.disableDefaultConstraintViolation();
-            context.buildConstraintViolationWithTemplate("해당 식당이 존재하지 않습니다.")
+            context.buildConstraintViolationWithTemplate(ErrorStatus.REGION_NOT_FOUND.getMessage())
                     .addConstraintViolation();
         }
 

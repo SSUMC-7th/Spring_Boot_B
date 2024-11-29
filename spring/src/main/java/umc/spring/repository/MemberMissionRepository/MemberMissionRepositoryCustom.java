@@ -6,7 +6,9 @@ import umc.spring.domain.Member;
 import umc.spring.domain.Mission;
 import umc.spring.domain.mapping.MemberMission;
 
+import java.util.Optional;
+
 public interface MemberMissionRepositoryCustom {
     Page<MemberMission> findMissionsByMemberAndStatus(Long memberId, String status, Long cursor, Pageable pageable);
-    MemberMission findByMemberAndMission(Member member, Mission mission);
+    Optional<MemberMission> findByMemberAndMission(Long memberId, Long missionId);
 }
