@@ -6,5 +6,6 @@ import umc.spring.dto.reviewDTO.ReviewRequestDTO;
 
 public interface ReviewService {
     Review addReview(ReviewRequestDTO.AddReviewDTO request, Long restaurantId);
-    Page<Review> getReviewList(Long restaurantId, Integer page);
+    Page<Review> getReviewListByRestaurantId(Long restaurantId, Integer page);
+    Page<Review> getReviewListByMemberId(Long memberId, Integer page);
 }
