@@ -8,10 +8,12 @@ import org.springframework.stereotype.Service;
 import umc.spring.apiPayload.code.status.ErrorStatus;
 import umc.spring.apiPayload.exception.handler.RegionHandler;
 import umc.spring.converter.StoreConverter;
+import umc.spring.domain.Mission;
 import umc.spring.domain.Region;
 import umc.spring.domain.Review;
 import umc.spring.domain.Store;
 
+import umc.spring.repository.MissionRepository.MissionRepository;
 import umc.spring.repository.RegionRepository.RegionRepository;
 import umc.spring.repository.ReviewRepository.ReviewRepository;
 import umc.spring.repository.StoreRepository.StoreRepository;
@@ -24,6 +26,7 @@ public class StoreServiceImpl implements StoreService {
 
     private final StoreRepository storeRepository;
     private final RegionRepository regionRepository;
+    private final MissionRepository missionRepository;
     private final ReviewRepository reviewRepository;
 
     @Override
@@ -37,6 +40,14 @@ public class StoreServiceImpl implements StoreService {
     }
 
     @Override
+    public Page<Mission> getMissionList(Long storeId, Integer page) {
+        Store store = storeRepository.findById(storeId).get();
+
+        Page<Mission> storePage = missionRepository.findAllByStore(store, PageRequest.of(page, 10));
+        return storePage;
+    }
+
+
     public Page<Review> getReviewList(Long storeId, Integer page) {
         Store store = storeRepository.findById(storeId).get();
 

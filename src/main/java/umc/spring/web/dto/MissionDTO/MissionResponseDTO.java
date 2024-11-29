@@ -20,7 +20,6 @@ public class MissionResponseDTO {
         LocalDateTime createdAt;
     }
 
-
     @Builder
     @Getter
     @NoArgsConstructor
