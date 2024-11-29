@@ -10,10 +10,12 @@ import umc.spring.apiPayload.exception.handler.RegionHandler;
 import umc.spring.converter.StoreConverter;
 import umc.spring.domain.Mission;
 import umc.spring.domain.Region;
+import umc.spring.domain.Review;
 import umc.spring.domain.Store;
 
 import umc.spring.repository.MissionRepository.MissionRepository;
 import umc.spring.repository.RegionRepository.RegionRepository;
+import umc.spring.repository.ReviewRepository.ReviewRepository;
 import umc.spring.repository.StoreRepository.StoreRepository;
 import umc.spring.web.dto.StoreDTO.StoreRequestDTO;
 
@@ -25,6 +27,8 @@ public class StoreServiceImpl implements StoreService {
     private final StoreRepository storeRepository;
     private final RegionRepository regionRepository;
     private final MissionRepository missionRepository;
+    private final ReviewRepository reviewRepository;
+
     @Override
     @Transactional
     public Store joinStore(StoreRequestDTO.JoinDTO request) {
@@ -43,6 +47,13 @@ public class StoreServiceImpl implements StoreService {
         return storePage;
     }
 
+
+    public Page<Review> getReviewList(Long storeId, Integer page) {
+        Store store = storeRepository.findById(storeId).get();
+
+        Page<Review> storePage = reviewRepository.findAllByStore(store, PageRequest.of(page, 10));
+        return storePage;
+    }
 
     public boolean doesStoreExist(Long storeId) {
         return storeRepository.existsById(storeId);
