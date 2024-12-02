@@ -4,5 +4,5 @@ import umc.spring.domain.Member;
 import umc.spring.web.dto.MemberRequestDTO;
 
 public interface MemberCommandService {
-    Member joinMember(MemberRequestDTO.CreateMemberDto request);
+    Member createMember(MemberRequestDTO.CreateMemberDto request);
 }

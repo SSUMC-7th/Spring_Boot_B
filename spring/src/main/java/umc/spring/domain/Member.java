@@ -43,10 +43,20 @@ public class Member extends BaseEntity {
 
     @Column(nullable = false, length = 40)
     private String specAddress;
-
-    //@Column(nullable = false, length = 40)
+/**********************************보안 관련 필드 및 비밀번호 설정 함수**********************************/
+    @Column(nullable = false, unique = true)
     private String email;
 
+    @Column(nullable = false)
+    private String password;
+
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
+    public void encodePassword(String password) {
+        this.password = password;
+    }
+/**************************************************************************************************/
     @ColumnDefault("0")
     private Integer point;
 
