@@ -6,6 +6,7 @@ import org.hibernate.annotations.ColumnDefault;
 import umc.spring.domain.common.BaseEntity;
 import umc.spring.domain.enums.Gender;
 import umc.spring.domain.enums.MemberStatus;
+import umc.spring.domain.enums.Role;
 import umc.spring.domain.enums.SocialType;
 
 import java.time.LocalDate;
@@ -45,8 +46,18 @@ public class Member extends BaseEntity {
     @Column(nullable = false, length = 50)
     private String email;
 
+    @Column(nullable = false)
+    private String password;
+
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
     private Long point;
 
     private String tel;
+
+    public void encodePassword(String password) {
+        this.password = password;
+    }
 
 }

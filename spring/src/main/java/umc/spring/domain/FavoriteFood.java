@@ -20,9 +20,4 @@ public class FavoriteFood extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private Food food;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "member_id")
-    private Member member;
-
-
 }
