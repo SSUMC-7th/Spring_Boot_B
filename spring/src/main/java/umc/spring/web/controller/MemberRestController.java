@@ -22,7 +22,7 @@ public class MemberRestController {
 
     @PostMapping("/")
     public ApiResponse<MemberResponseDTO.CreateMemberResultDTO> addMember(@RequestBody @Valid MemberRequestDTO.CreateMemberDto request){
-        Member member = memberCommandService.joinMember(request);
-        return ApiResponse.onSuccess(MemberConverter.toJoinResultDTO(member));
+        Member member = memberCommandService.createMember(request);
+        return ApiResponse.onSuccess(MemberConverter.toCreateResultDTO(member));
     }
 }

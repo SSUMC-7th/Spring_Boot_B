@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class MemberConverter {
 
-    public static MemberResponseDTO.CreateMemberResultDTO toJoinResultDTO(Member member){
+    public static MemberResponseDTO.CreateMemberResultDTO toCreateResultDTO(Member member){
         return MemberResponseDTO.CreateMemberResultDTO.builder()
                 .memberId(member.getId())
                 .createdAt(LocalDateTime.now())
@@ -18,22 +18,17 @@ public class MemberConverter {
     }
 
     public static Member toMember(MemberRequestDTO.CreateMemberDto request){
-
         Gender gender = null;
-
         switch (request.getGender()){
-            case 1:
-                gender = Gender.MALE;
-                break;
-            case 2:
-                gender = Gender.FEMALE;
-                break;
-            case 3:
-                gender = Gender.NONE;
-                break;
+            case 1: gender = Gender.MALE; break;
+            case 2: gender = Gender.FEMALE; break;
+            case 3: gender = Gender.NONE; break;
         }
 
         return Member.builder()
+                .email(request.getEmail())
+                .password(request.getPassword())
+                .role(request.getRole())
                 .address(request.getAddress())
                 .specAddress(request.getSpecAddress())
                 .gender(gender)
