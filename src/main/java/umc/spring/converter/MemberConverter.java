@@ -41,10 +41,13 @@ public class MemberConverter {
 
         return Member.builder()
                 .address(request.getAddress())
+                .email(request.getEmail())
+                .password(request.getPassword())
                 .specAddress(request.getSpecAddress())
                 .gender(gender)
                 .name(request.getName())
                 .memberPreferList(new ArrayList<>())
+                .role(request.getRole())
                 .build();
     }
 

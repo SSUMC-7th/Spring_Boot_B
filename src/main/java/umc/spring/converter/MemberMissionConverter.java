@@ -3,7 +3,7 @@ package umc.spring.converter;
 import umc.spring.domain.Member;
 import umc.spring.domain.Mission;
 import umc.spring.domain.mapping.MemberMission;
-import umc.spring.domain.mapping.MissionStatus;
+import umc.spring.domain.enums.MissionStatus;
 import umc.spring.web.dto.MemberMissionDTO.MemberMissionResponseDTO;
 
 import java.time.LocalDateTime;

@@ -55,7 +55,7 @@ public class StoreController {
     @Parameters({
             @Parameter(name = "storeId", description = "가게의 아이디, path variable 입니다!")
     })
-    public ApiResponse<MissionResponseDTO.MissionPreviewListDTO> getReviewList(@ExistStores @PathVariable(name = "storeId") Long storeId, @CheckPage @RequestParam(name = "page") Integer page){
+    public ApiResponse<MissionResponseDTO.MissionPreviewListDTO> getMissionList(@ExistStores @PathVariable(name = "storeId") Long storeId, @CheckPage @RequestParam(name = "page") Integer page){
         Page<Mission> missionList = storeService.getMissionList(storeId, page-1);
         return ApiResponse.onSuccess(StoreConverter.missionPreviewListDTO(missionList));
     }

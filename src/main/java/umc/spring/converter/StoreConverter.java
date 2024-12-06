@@ -50,6 +50,8 @@ public class StoreConverter {
                 .totalElements(missionList.getTotalElements())
                 .listSize(missionPreviewDTOList.size())
                 .missionList(missionPreviewDTOList)
+                .build();
+    }
     public static ReviewResponseDTO.ReviewPreviewDTO reviewPreviewDTO(Review review) {
         return ReviewResponseDTO.ReviewPreviewDTO.builder()
                 .ownerNickname(review.getMember().getName())

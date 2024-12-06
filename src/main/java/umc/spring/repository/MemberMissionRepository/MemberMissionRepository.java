@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import umc.spring.domain.Mission;
 import umc.spring.domain.mapping.MemberMission;
-import umc.spring.domain.mapping.MissionStatus;
+import umc.spring.domain.enums.MissionStatus;
 
 import java.util.Optional;
 
