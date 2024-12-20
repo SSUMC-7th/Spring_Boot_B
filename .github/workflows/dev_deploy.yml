@@ -20,7 +20,7 @@ jobs:
       - name: Make application.yml  # application.yml 파일 생성
         run: |
           cd ./src/main/resources
-          echo "${{ secrets.APPLICATION_YML }}" > ./application.yml
+          echo "${{ secrets.APPLICATION_YML_NUNU }}" > ./application.yml
         shell: bash
 
       - name: Grant execute permission for gradlew  # gradlew 실행 권한 부여
@@ -50,9 +50,9 @@ jobs:
 
       - name: Deploy to EC2  # EC2에 배포
         env:
-          EC2_SSH_KEY: ${{ secrets.EC2_SSH_KEY }}
-          EC2_USERNAME: ${{ secrets.EC2_USERNAME }}
-          EC2_HOST: ${{ secrets.EC2_HOST }}
+          EC2_SSH_KEY: ${{ secrets.EC2_SSH_KEY_NUNU }}
+          EC2_USERNAME: ${{ secrets.EC2_USERNAME_NUNU }}
+          EC2_HOST: ${{ secrets.EC2_HOST_NUNU }}
         run: |
           echo "$EC2_SSH_KEY" > private_key.pem
           chmod 600 private_key.pem
