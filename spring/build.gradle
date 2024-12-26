@@ -1,28 +1,28 @@
 plugins {
 	id 'java'
-	id 'org.springframework.boot' version '3.3.4'
-	id 'io.spring.dependency-management' version '1.1.6'
+	id 'org.springframework.boot' version '3.0.0'
+	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
 	// id "com.ewerk.gradle.plugins.querydsl" version "1.0.10"
 }
 
-group = 'umc'
-version = '0.0.1-SNAPSHOT'
+group = 'com.example'
+version = '1.0.0'
+sourceCompatibility='17'
 
 java {
 	toolchain {
 		languageVersion = JavaLanguageVersion.of(17)
 	}
 }
-/*
+
 configurations {
 	compileOnly {
 		extendsFrom annotationProcessor
 	}
-	querydsl.extendsFrom compileClasspath
+	//	querydsl.extendsFrom compileClasspath
 	//compileClasspath에 포함된 모든 라이브러리가 querydsl에서도 사용 가능하게 됨
 	// QueryDSL 라이브러리를 자동 생성 시에 필요한 경로로 포함
 }
-*/
 
 repositories {
 	mavenCentral()
@@ -79,6 +79,13 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
+tasks.named('test') {
+	useJUnitPlatform()
+}
+
+// Querydsl 설정부
+def generated = 'src/main/generated'
+
 sourceSets {
 	main {
 		java {
@@ -87,15 +94,22 @@ sourceSets {
 	}
 }
 
-tasks.named('test') {
-	useJUnitPlatform()
-}
-
-// Querydsl 설정부
-def generated = 'src/main/generated'
-clean {
-	delete file(generated)
-}
 tasks.withType(JavaCompile) {
 	options.generatedSourceOutputDirectory = file(generated)
+}
+
+clean.doLast {
+	file(querydslDir).deleteDir()
+}
+
+clean {
+	delete fileTree(dir: 'src/main/generated', include: '**/*.java')
+}
+tasks.withType(JavaCompile) {
+	options.compilerArgs += [
+			'--add-opens',
+			'java.base/java.lang=ALL-UNNAMED',
+			'--add-opens',
+			'java.base/java.util=ALL-UNNAMED'
+	]
 }
