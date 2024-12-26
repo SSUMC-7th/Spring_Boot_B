@@ -32,7 +32,7 @@ jobs:
         uses: gradle/gradle-build-action@v2
         with:
           gradle-executable: ./spring/gradlew  # gradlew 경로 지정
-          arguments: build
+          arguments: build --warning-mode all
           build-root-directory: ./spring  # build-root-directory 설정 (spring 디렉토리에서 Gradle 빌드)
 
       - name: Upload build artifact  # 빌드된 아티팩트 업로드
